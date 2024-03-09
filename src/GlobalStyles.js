@@ -1,0 +1,16 @@
+export const FontFamily = {
+    sunflowerMedium: "Sunflower-Medium",
+    syncopateRegular: "Syncopate-Regular",
+    tajawalRegular: "Tajawal-Regular",
+    ubuntuRegular: "Ubuntu-Regular",
+    ubuntuLight: "Ubuntu-Light",
+    zenMaruGothicBold:"ZenMaruGothic-Bold",
+    zenAntiqueSoftRegular:"ZenAntiqueSoft-Regular",
+    sunflowerBold: "Sunflower-Bold",
+    zenMaruGothicMedium:"ZenMaruGothic-Medium",
+    amikoSemiBold: "Amiko-SemiBold",
+    ultraRegular: "Ultra-Regular",
+    thasadithRegular: "Thasadith-Regular",
+    syncopateBold: "Syncopate-Bold",
+    thasadithBold: "Thasadith-Bold",
+};

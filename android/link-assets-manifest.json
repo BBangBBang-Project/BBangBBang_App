@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/ZenMaruGothic-Bold.ttf",
+      "sha1": "a46a4087177b39f4364a6af1ca56b377ff4c2bd9"
+    },
+    {
+      "path": "src/assets/fonts/ZenMaruGothic-Medium.ttf",
+      "sha1": "d473e4bc4ff00a59d72adc446548b13b1e18fab7"
+    },
+    {
+      "path": "src/assets/fonts/ZenMaruGothic-Regular.ttf",
+      "sha1": "efcf59064abab0d5d8fa964e7f547a45f1860229"
+    }
+  ]
+}
