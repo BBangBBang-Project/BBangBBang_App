@@ -6,6 +6,7 @@ import SignUpScreen from './screens/SignUp/SignUpScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Header from './components/Header';
+import HomeScreen from './screens/Home/HomeScreen';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +29,7 @@ const App = () => {
     }, []);
 
     return(
-     <Header></Header>
+    <HomeScreen></HomeScreen>
     );
 };
 

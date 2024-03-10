@@ -1,11 +1,11 @@
 import React from 'react';
 import { View,Text,StyleSheet,Image } from 'react-native';
 
-const BreadCard = () =>{
+const BreadCard = ({ imageUrl, name, originalPrice, salePrice }) => {
     return (
         <View style={styles.card}>
             <View style={styles.imageContainer}>
-                <Image source={{ uri: imageUrl }} style={styles.image} />
+            <Image source={imageUrl} style={styles.image} />
             </View>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.originalPrice}>{originalPrice}</Text>
@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       margin: 10,
+      backgroundColor:'#FAEBE1',
+      overflow: 'hidden',
     },
     imageContainer: {
       marginTop: 40,
@@ -43,11 +45,12 @@ const styles = StyleSheet.create({
       fontSize: 10,
       textDecorationLine: 'line-through',
       marginTop: 20,
+      color : 'grey'
     },
     salePrice: {
       fontSize: 15,
-      color: 'red',
-      marginTop: 10,
+      color: 'rgba(225, 36, 36, 0.66)',
+      marginTop: 1,
     },
   });
   
