@@ -85,7 +85,7 @@ function BottomTab() {
           options={{
             headerShown: false,
             tabBarLabel: () => null,
-            tabBarIcon: ({ color }) => <Icon2 name="user" size={40} color={color} />,
+            tabBarIcon: ({ color }) => <Icon2 name="user" size={45} color={color} />,
           }}
         />
       </Tab.Navigator>
