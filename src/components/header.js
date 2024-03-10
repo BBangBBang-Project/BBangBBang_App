@@ -8,7 +8,7 @@ const Header = () => {
         <View style={styles.container}>
         <Image style={styles.image} source={require('../assets/images/whiteBread.png')} />
         <Text style={styles.logotext}>BBANGBBANG</Text>
-        <Icon style={styles.search} name="search" size={25} color="black"></Icon>
+        <Icon style={styles.search} name="search" size={30} color="black"></Icon>
         <Icon2 style={styles.icon} name="shopping-basket" size={20} color="black"></Icon2>
       </View>
     );
@@ -33,12 +33,12 @@ const styles = StyleSheet.create({
         fontFamily:'Syncopate', 
     },
     search:{
-        marginTop: 38,
-        marginLeft: 100,
+        marginTop: 34,
+        marginLeft: 105,
     },
     icon: {
-        marginTop: 40,
-        marginLeft: 20,
+        marginTop: 37,
+        marginLeft: 10,
     }
 });
 export default Header;

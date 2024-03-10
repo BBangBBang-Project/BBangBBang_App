@@ -32,7 +32,7 @@ const breadData = [
 
 const HomeScreen = () => {
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
       <Header />
       <View style={styles.screenContainer}>
       <ScrollView
@@ -58,6 +58,10 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
+    container : {
+        flex : 1,
+        backgroundColor: 'white'
+    },
     scrollViewContainer:{
         flexGrow: 1
     },
