@@ -55,7 +55,8 @@ function BottomTab() {
             right: 0,
             elevation: 0,
             backgroundColor: '#FAEBE1',
-            borderRadius: 15,
+            // borderTopLeftRadius: 20,
+            // borderTopRightRadius: 25,
           },
         }}>
         <Tab.Screen
