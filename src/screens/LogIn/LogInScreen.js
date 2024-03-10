@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const LogInScreen = () => {
+const LogInScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
@@ -19,7 +19,8 @@ const LogInScreen = () => {
         </TouchableOpacity>
         <View style={styles.signUpContainer}>
         <Text style={styles.ifnot}>아직 회원이 아니라면?</Text>
-        <TouchableOpacity style={styles.SignUpbutton}>
+        <TouchableOpacity style={styles.SignUpbutton}
+        onPress={() => navigation.navigate('SignUp')}>
           <Text style={styles.signUpText}>sign up</Text>
         </TouchableOpacity>
         </View>
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   upperContainer: {
-    flex: 0.35,
+    flex: 0.3,
     backgroundColor: '#F3E3D3',
     justifyContent: 'center',
     alignItems: 'center'
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     marginBottom: -40,
   },
   lowerContainer: {
-    flex: 0.65,
+    flex: 0.7,
     backgroundColor: '#ffffff',
     alignItems: 'center',
     borderTopLeftRadius: 30,
@@ -101,15 +102,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   ifnot:{
-    marginTop:20,
-    marginLeft: -150,
+    marginTop:15,
+    marginLeft: -110,
     fontSize : 14,
+    marginRight: 20,
     color :'black'
   },
   signUpText:{
-    marginLeft:50,
-    marginRight: -100,
-    marginTop:20,
+    fontSize : 14,
+    marginLeft:20,
+    marginRight: -80,
+    marginTop:15,
   }
 });
 

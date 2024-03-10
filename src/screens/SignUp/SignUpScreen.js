@@ -6,7 +6,7 @@ const SignUpScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <Image style={styles.image} source={require('../../assets/images/bread.png')} />
+        <Image style={styles.image} source={require('../../assets/images/whiteBread.png')} />
         <Text style={styles.logoText}>Sign Up</Text>
       </View>
       <View style={styles.lowerContainer}>
@@ -28,27 +28,31 @@ const SignUpScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    conatainer:{
-        backgroundColor:'white',
+    container:{
+      flex: 1,
+      backgroundColor:'white',
     },
     logoContainer:{
-        flexDirection: 'row',
+      flex : 0.25,
+      flexDirection: 'row',
     },
     image:{
-        marginTop: 70,
+        marginTop: 80,
         marginLeft: 70,
-        height:90,
-        width: 90,
+        height:70,
+        width: 70,
     },logoText: {
-        marginTop: 90,
+        marginTop: 80,
         marginLeft: 5,
         fontSize: 50,
         fontFamily: 'ZenMaruGothic-bold',
         color: 'black',
         fontWeight: 'bold'
       },
+      lowerContainer: {
+        flex : 0.75,
+      },
       idText: {
-        marginTop: 30,
         marginLeft: 60,
         fontSize: 20,
         fontFamily: 'ZenMaruGothic-bold',
@@ -90,14 +94,13 @@ const styles = StyleSheet.create({
       },
       infText: {
         marginTop: 10,
-        marginLeft: 60,
+        marginLeft: 90,
         fontSize: 8,
         color: 'grey'
       },
       button: {
-        marginTop: 70,
+        marginTop: 30,
         marginLeft: 40,
-        marginBottom: 30,
         width: width * 0.8,
         height: height * 0.07,
         backgroundColor: '#FECBA4',

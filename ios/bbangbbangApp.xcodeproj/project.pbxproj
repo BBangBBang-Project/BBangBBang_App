@@ -14,9 +14,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-bbangbbangApp-bbangbbangAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-bbangbbangApp-bbangbbangAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		C9D2D12BE39A4F5A91B9A470 /* ZenMaruGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC08609F4BA54793835F22DA /* ZenMaruGothic-Regular.ttf */; };
 		E4201633684049BAB8EAD4C0 /* ZenMaruGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706BC74B0E164C4C9B5DD133 /* ZenMaruGothic-Bold.ttf */; };
 		FD8E2C71A1C9444CAAEA831B /* ZenMaruGothic-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BFB6AB0F4164DC091636B64 /* ZenMaruGothic-Medium.ttf */; };
-		C9D2D12BE39A4F5A91B9A470 /* ZenMaruGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC08609F4BA54793835F22DA /* ZenMaruGothic-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,15 +41,15 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = bbangbbangApp/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-bbangbbangApp-bbangbbangAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bbangbbangApp-bbangbbangAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-bbangbbangApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bbangbbangApp.debug.xcconfig"; path = "Target Support Files/Pods-bbangbbangApp/Pods-bbangbbangApp.debug.xcconfig"; sourceTree = "<group>"; };
+		3BFB6AB0F4164DC091636B64 /* ZenMaruGothic-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ZenMaruGothic-Medium.ttf"; path = "../src/assets/fonts/ZenMaruGothic-Medium.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-bbangbbangApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bbangbbangApp.release.xcconfig"; path = "Target Support Files/Pods-bbangbbangApp/Pods-bbangbbangApp.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-bbangbbangApp-bbangbbangAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bbangbbangApp-bbangbbangAppTests.debug.xcconfig"; path = "Target Support Files/Pods-bbangbbangApp-bbangbbangAppTests/Pods-bbangbbangApp-bbangbbangAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-bbangbbangApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bbangbbangApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		706BC74B0E164C4C9B5DD133 /* ZenMaruGothic-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ZenMaruGothic-Bold.ttf"; path = "../src/assets/fonts/ZenMaruGothic-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = bbangbbangApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-bbangbbangApp-bbangbbangAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bbangbbangApp-bbangbbangAppTests.release.xcconfig"; path = "Target Support Files/Pods-bbangbbangApp-bbangbbangAppTests/Pods-bbangbbangApp-bbangbbangAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		AC08609F4BA54793835F22DA /* ZenMaruGothic-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ZenMaruGothic-Regular.ttf"; path = "../src/assets/fonts/ZenMaruGothic-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		706BC74B0E164C4C9B5DD133 /* ZenMaruGothic-Bold.ttf */ = {isa = PBXFileReference; name = "ZenMaruGothic-Bold.ttf"; path = "../src/assets/fonts/ZenMaruGothic-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3BFB6AB0F4164DC091636B64 /* ZenMaruGothic-Medium.ttf */ = {isa = PBXFileReference; name = "ZenMaruGothic-Medium.ttf"; path = "../src/assets/fonts/ZenMaruGothic-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AC08609F4BA54793835F22DA /* ZenMaruGothic-Regular.ttf */ = {isa = PBXFileReference; name = "ZenMaruGothic-Regular.ttf"; path = "../src/assets/fonts/ZenMaruGothic-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,15 +156,15 @@
 			sourceTree = "<group>";
 		};
 		C5C7E8A2139B433FBE42F3BD /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				706BC74B0E164C4C9B5DD133 /* ZenMaruGothic-Bold.ttf */,
 				3BFB6AB0F4164DC091636B64 /* ZenMaruGothic-Medium.ttf */,
 				AC08609F4BA54793835F22DA /* ZenMaruGothic-Regular.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
