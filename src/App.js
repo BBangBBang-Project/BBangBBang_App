@@ -5,6 +5,7 @@ import LogInScreen from './screens/LogIn/LogInScreen';
 import SignUpScreen from './screens/SignUp/SignUpScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Header from './components/Header';
 
 const Stack = createStackNavigator();
 
@@ -27,9 +28,7 @@ const App = () => {
     }, []);
 
     return(
-      <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
+     <Header></Header>
     );
 };
 

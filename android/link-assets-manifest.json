@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/Syncopate.ttf",
+      "sha1": "2db3b9c435e7e7f52203e3d636d3ddb90e4e0878"
+    },
+    {
       "path": "src/assets/fonts/ZenMaruGothic-Bold.ttf",
       "sha1": "a46a4087177b39f4364a6af1ca56b377ff4c2bd9"
     },
