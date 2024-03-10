@@ -17,7 +17,7 @@ const BreadCard = ({ imageUrl, name, originalPrice, salePrice }) => {
 const styles = StyleSheet.create({
     card: {
       width: 227,
-      height: 249,
+      height: 300,
       borderRadius: 15,
       alignItems: 'center',
       justifyContent: 'center',
