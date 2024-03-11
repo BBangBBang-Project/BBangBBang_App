@@ -52,7 +52,7 @@ const HomeScreen = () => {
           ))}
         </View>
       </ScrollView>
-      </View>
+      </View> 
     </View>
   );
 };
