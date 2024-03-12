@@ -1,7 +1,9 @@
-import React from 'react';
-import { View,Text,StyleSheet,Image } from 'react-native';
+import React,{useState} from 'react';
+import { View,Text,StyleSheet,Image,TouchableOpacity } from 'react-native';
+import AddButton from './AddButton';
 
-const BreadCard = ({ imageUrl, name, originalPrice, salePrice }) => {
+const BreadCard = ({ imageUrl, name, originalPrice, salePrice, onAddPress}) => {
+
     return (
         <View style={styles.card}>
             <View style={styles.imageContainer}>
@@ -10,6 +12,9 @@ const BreadCard = ({ imageUrl, name, originalPrice, salePrice }) => {
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.originalPrice}>{originalPrice}</Text>
         <Text style={styles.salePrice}>{salePrice}</Text>
+        <View style={styles.addButtonContainer}>
+        <AddButton onPress={onAddPress} />
+            </View>
         </View>
     );
 };
@@ -51,6 +56,11 @@ const styles = StyleSheet.create({
       fontSize: 15,
       color: 'rgba(225, 36, 36, 0.66)',
       marginTop: 1,
+    },
+    addButtonContainer : {
+      position: 'absolute',
+      bottom: 13,
+      right: 10,
     },
   });
   

@@ -1,7 +1,8 @@
-import React from 'react';
-import { View, ScrollView,StyleSheet } from 'react-native';
-import BreadCard from '../../components/BreadCard';
+import React, {useState} from 'react';
+import { View, ScrollView,StyleSheet, Modal, Text, TouchableOpacity } from 'react-native';
+import BreadCard from './components/BreadCard';
 import Header from '../../components/Header';
+import ModalScreen from './ModalScreen';
 
 const breadData = [
   {
@@ -31,15 +32,28 @@ const breadData = [
 ];
 
 const HomeScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+// 모달을 보여주는 함수
+  const showModal = (item) => {
+    setSelectedItem(item);
+    setModalVisible(true);
+  };
+
+  // 모달을 숨기는 함수
+  const hideModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.screenContainer}>
       <ScrollView
-  horizontal={true}
-  style={styles.scrollViewContainer}
-  contentContainerStyle={{ alignItems: 'center' }}
->
+        horizontal={true}
+        style={styles.scrollViewContainer}
+        contentContainerStyle={{ alignItems: 'center' }}>
         <View style={styles.cardContainer}>
           {breadData.map((bread, index) => (
             <BreadCard
@@ -48,11 +62,26 @@ const HomeScreen = () => {
               name={bread.name}
               originalPrice={bread.originalPrice}
               salePrice={bread.salePrice}
+              onAddPress={() => showModal(bread)}
             />
           ))}
         </View>
       </ScrollView>
       </View> 
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={hideModal}>
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={hideModal}>
+          <View style={styles.modalContainer} >
+          <ModalScreen item={selectedItem} onClose={hideModal} isVisible={modalVisible} />
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };
@@ -73,8 +102,17 @@ const styles = StyleSheet.create({
     cardContainer:{
         flexDirection: 'row',
         alignItems: 'center',
-
-    }
+    },
+    modalOverlay: {
+      flex: 1,
+      justifyContent: 'flex-end', // 모달을 화면의 바닥에 맞추기
+      backgroundColor: 'rgba(0,0,0,0.5)', // 배경 투명도 조정
+    },
+    modalContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'white'
+    },
 });
 
 export default HomeScreen;
