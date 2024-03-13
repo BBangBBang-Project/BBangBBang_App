@@ -5,8 +5,6 @@ import LogInScreen from './screens/LogIn/LogInScreen';
 import SignUpScreen from './screens/SignUp/SignUpScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Header from './components/Header';
-import HomeScreen from './screens/Home/HomeScreen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import BottomTab from './navigations/BottomTab';
 
