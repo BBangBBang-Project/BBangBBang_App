@@ -51,6 +51,7 @@ const MyPage  = () => {
 
 const styles = StyleSheet.create({
     myPageContainer : {
+        flex : 1,
         backgroundColor : 'white',
     },
     myName : {

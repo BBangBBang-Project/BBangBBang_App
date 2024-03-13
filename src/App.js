@@ -31,17 +31,10 @@ const App = () => {
     }, []);
 
     return( 
-    <SafeAreaProvider style = {styles.appBackground}>
+    <SafeAreaProvider>
       <BottomTab/>
       </SafeAreaProvider>
     );
 };
-
-const styles = StyleSheet.create ({
-  appBackground : {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-});
 
   export default App;
