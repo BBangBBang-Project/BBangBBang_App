@@ -16,7 +16,7 @@ function CustomTabBarButton({ children, onPress }) {
   return (
     <TouchableOpacity
       style={{
-        top: -40,
+        top: -25,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 5,
