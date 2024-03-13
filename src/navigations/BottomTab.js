@@ -8,7 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import HomeScreen from '../screens/Home/HomeScreen';
 import LogInScreen from '../screens/LogIn/LogInScreen';
-import SignUpScreen from '../screens/SignUp/SignUpScreen';
+import MyPage from '../screens/MyPage/MyPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -82,7 +82,7 @@ function BottomTab() {
         />
         <Tab.Screen
           name="Mypage"
-          component={SignUpScreen}
+          component={MyPage}
           options={{
             headerShown: false,
             tabBarLabel: () => null,

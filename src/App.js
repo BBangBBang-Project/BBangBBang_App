@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {AppRegistry} from 'react-native';
+import {AppRegistry, StyleSheet} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import LogInScreen from './screens/LogIn/LogInScreen';
 import SignUpScreen from './screens/SignUp/SignUpScreen';
@@ -30,11 +30,18 @@ const App = () => {
       SplashScreen.hide();
     }, []);
 
-    return(
-      <SafeAreaProvider>
+    return( 
+    <SafeAreaProvider style = {styles.appBackground}>
       <BottomTab/>
       </SafeAreaProvider>
     );
 };
+
+const styles = StyleSheet.create ({
+  appBackground : {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
 
   export default App;
