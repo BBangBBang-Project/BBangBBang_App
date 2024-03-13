@@ -7,7 +7,7 @@ import Icon2 from 'react-native-vector-icons/FontAwesome';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import HomeScreen from '../screens/Home/HomeScreen';
-import LogInScreen from '../screens/LogIn/LogInScreen';
+import LikeScreen from '../screens/Like/LikeScreen';
 import MyPage from '../screens/MyPage/MyPage';
 
 const Tab = createBottomTabNavigator();
@@ -56,7 +56,7 @@ tabBarIcon: ({ color }) => <Icon name="home" size={40} color={color} />,
 />
 <Tab.Screen
 name="Like"
-component={LogInScreen}
+component={LikeScreen}
 options={{
 headerShown: false,
 tabBarLabel: () => null,
