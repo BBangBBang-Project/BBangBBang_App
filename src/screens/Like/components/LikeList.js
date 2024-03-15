@@ -67,8 +67,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     listImage : {
-        width: '50%',
-      height: '50%',
+        width: '80%',
+        height: '80%',
+        resizeMode :'contain',
     },
     listName : {
         fontSize : 20,
