@@ -9,7 +9,7 @@ const OrderListScreen = () => {
     const navigation = useNavigation();
 
     return (
-        <View style = {styles.likeScreenContainer}> 
+        <View style = {styles.orderScreenContainer}> 
         <View style = {[styles.titleContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon style={styles.goBackButton} name = "chevron-back-outline"></Icon>
@@ -29,7 +29,7 @@ const OrderListScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    likeScreenContainer : {
+    orderScreenContainer : {
         flex : 1,
         backgroundColor : 'white',
         
@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
     goBackButton : {
         marginLeft : 10,
         fontSize : 40,
+        marginBottom : 30,
     },
     titleText : {
         marginLeft : 20,
         fontSize : 30,
-        marginBottom : 40,
         fontFamily:'Syncopate', 
     }
 });
