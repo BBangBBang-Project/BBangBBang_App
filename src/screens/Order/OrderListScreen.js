@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         marginLeft : 20,
         fontSize : 30,
         marginBottom : 40,
-
+        fontFamily:'Syncopate', 
     }
 });
 

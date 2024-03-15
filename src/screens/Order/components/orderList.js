@@ -51,15 +51,15 @@ const styles = StyleSheet.create({
         marginLeft : 20,
         marginTop : 10,
         fontSize : 13,
-
+        fontFamily : 'Strait',
     },
     listImageContainer : {
         marginTop : 10,
         marginLeft : 30,
         marginBottom : 10,
-        width : 80,
-        height : 80,
-        borderRadius: 40,
+        width : 90,
+        height : 90,
+        borderRadius: 45,
         backgroundColor : '#FAEBE1',
         alignItems: 'center',
         justifyContent: 'center',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
       resizeMode : 'contain',
     },
     listName : {
-        fontSize : 18,
+        fontSize : 20,
         marginLeft : 50,
     },
     salePrice : {
@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
     addSameMunuButton: {
         borderWidth: 1,
         borderColor: '#FF7E7E',
-        marginTop : 65,
-        marginLeft : 22,
+        marginTop : 75,
+        marginLeft : 0,
         width : 90,
         height : 25,
         alignItems: 'center',
