@@ -93,6 +93,8 @@ const styles = StyleSheet.create({
 
     buttonContainer : {
         flexDirection: 'row',
+        marginBottom : 10,
+        marginTop : -30,
     },
     deleteButton : {
         backgroundColor: '#ffffff',
@@ -102,7 +104,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius : 10,
-        marginTop : -20,
+
+
         borderWidth: 1,
         borderColor : '#000000'
     }, 
@@ -119,7 +122,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius : 10,
-        marginTop : -20,
       },
       inMyBagText: {
         color: '#FF7E7E',

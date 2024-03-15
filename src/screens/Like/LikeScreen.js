@@ -16,7 +16,7 @@ const LikeScreen = () => {
             </TouchableOpacity>
             <Text style={styles.titleText}>찜한 상품 </Text>
             </View>
-            <ScrollView>
+            <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <LikeList/>
         <LikeList/>
         <LikeList/>
