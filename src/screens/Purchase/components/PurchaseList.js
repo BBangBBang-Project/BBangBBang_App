@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet,Text,Image } from 'react-native';
+import { View, StyleSheet,Text,Image } from 'react-native';
 
 const PurchaseList = () => {
     return (
