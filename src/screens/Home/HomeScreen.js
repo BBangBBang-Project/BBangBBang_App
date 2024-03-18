@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { View, ScrollView,StyleSheet, Modal, Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import BreadCard from './components/BreadCard';
 import Header from '../../components/Header';
 import ModalScreen from './ModalScreen';
