@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { View, ScrollView,StyleSheet, Modal, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import BreadCard from './components/BreadCard';
 import Header from '../../components/Header';
 import ModalScreen from './ModalScreen';
@@ -31,7 +32,7 @@ const breadData = [
   },
 ];
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -44,6 +45,11 @@ const HomeScreen = () => {
   // 모달을 숨기는 함수
   const hideModal = () => {
     setModalVisible(false);
+  };
+
+// DetailScreen으로 네비게이션하며 item 데이터 전달
+  const goToDetailScreen = (item) => {
+    navigation.navigate('Detail', { item }); 
   };
 
   return (
@@ -63,6 +69,7 @@ const HomeScreen = () => {
               originalPrice={bread.originalPrice}
               salePrice={bread.salePrice}
               onAddPress={() => showModal(bread)}
+              onCardPress={() => goToDetailScreen(bread)}
             />
           ))}
         </View>
