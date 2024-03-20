@@ -1,28 +1,75 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Dimensions } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Dimensions,
+  Alert
+} from 'react-native';
+import axios from 'axios';
 
-const { width, height } = Dimensions.get('window');
-const LogInScreen = ({ navigation }) => {
+const {width, height} = Dimensions.get('window');
+const LogInScreen = ({navigation}) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  // 로그인 요청 함수
+  const handleLogin = () => {
+    axios
+      .post('http://localhost:8080/customer/signin', {
+        username,
+        password,
+      })
+      .then(response => {
+        // 로그인 성공 처리
+        Alert.alert('로그인 성공', '로그인에 성공하였습니다.');
+        // 로그인 성공 후 필요한 로직 (예: 홈 화면으로 이동)
+        navigation.navigate('Home');
+      })
+      .catch(error => {
+        // 에러 처리
+        Alert.alert('로그인 실패', '아이디 또는 비밀번호를 확인해주세요.');
+      });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
-        <Image style={styles.image} source={require('../../assets/images/logo.png')} />
+        <Image
+          style={styles.image}
+          source={require('../../assets/images/logo.png')}
+        />
       </View>
       <View style={styles.lowerContainer}>
         <Text style={styles.login}>Login</Text>
         <Text style={styles.idText}>ID</Text>
-        <TextInput style={styles.input} />
+        <TextInput
+          style={styles.input}
+          onChangeText={setUsername}
+          value={username}
+          placeholder="ID"
+        />
         <Text style={styles.pwText}>password</Text>
-        <TextInput style={styles.input} />
-        <TouchableOpacity style={styles.button}>
+        <TextInput
+          style={styles.input}
+          onChangeText={setPassword}
+          value={password}
+          placeholder="Password"
+          secureTextEntry={true}
+        />
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
         <View style={styles.signUpContainer}>
-        <Text style={styles.ifnot}>아직 회원이 아니라면?</Text>
-        <TouchableOpacity style={styles.SignUpbutton}
-        onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.signUpText}>sign up</Text>
-        </TouchableOpacity>
+          <Text style={styles.ifnot}>아직 회원이 아니라면?</Text>
+          <TouchableOpacity
+            style={styles.SignUpbutton}
+            onPress={() => navigation.navigate('SignUp')}>
+            <Text style={styles.signUpText}>sign up</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -32,13 +79,13 @@ const LogInScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
   },
   upperContainer: {
     flex: 0.3,
     backgroundColor: '#F3E3D3',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image: {
     width: width * 0.4,
@@ -58,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontFamily: 'ZenMaruGothic-bold',
     color: 'black',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   idText: {
     marginTop: 30,
@@ -66,7 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'ZenMaruGothic-bold',
     color: 'black',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   input: {
     width: width * 0.8,
@@ -74,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAEBE1',
     borderRadius: 20,
     textAlign: 'center',
-    marginTop: height * 0.01
+    marginTop: height * 0.01,
   },
   pwText: {
     marginTop: 30,
@@ -82,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'ZenMaruGothic',
     color: 'black',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   button: {
     width: width * 0.8,
@@ -91,29 +138,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-    marginTop: height * 0.05
+    marginTop: height * 0.05,
   },
   buttonText: {
     fontSize: 24,
     color: 'black',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
-  signUpContainer:{
+  signUpContainer: {
     flexDirection: 'row',
   },
-  ifnot:{
-    marginTop:15,
+  ifnot: {
+    marginTop: 15,
     marginLeft: -110,
-    fontSize : 14,
+    fontSize: 14,
     marginRight: 20,
-    color :'black'
+    color: 'black',
   },
-  signUpText:{
-    fontSize : 14,
-    marginLeft:20,
+  signUpText: {
+    fontSize: 14,
+    marginLeft: 20,
     marginRight: -80,
-    marginTop:15,
-  }
+    marginTop: 15,
+  },
 });
 
 export default LogInScreen;

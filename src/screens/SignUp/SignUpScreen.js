@@ -1,8 +1,31 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Dimensions } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Dimensions,Alert } from 'react-native';
+import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
 const SignUpScreen = () => {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [quickPassword, setQuickPassword] = useState('');
+
+  const handleSignUp = () => {
+    axios.post('http://localhost:8080/customer/signup', {
+      username,
+      password,
+      name,
+      quickPassword,
+    })
+    .then(response => {
+      Alert.alert("회원가입 성공", "회원가입이 성공적으로 완료되었습니다.");
+    })
+    .catch(error => {
+      Alert.alert("회원가입 실패", "오류가 발생했습니다. 다시 시도해주세요.");
+      console.error(error);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -11,15 +34,15 @@ const SignUpScreen = () => {
       </View>
       <View style={styles.lowerContainer}>
         <Text style={styles.idText}>ID</Text>
-        <TextInput style={styles.input} />
+        <TextInput style={styles.input} onChangeText={setUsername} value={username} />
         <Text style={styles.nameText}>이름</Text>
-        <TextInput style={styles.input} />
+        <TextInput style={styles.input} onChangeText={setName} value={name} />
         <Text style={styles.pwText}>password</Text>
-        <TextInput style={styles.input} />
+        <TextInput style={styles.input} onChangeText={setPassword} value={password}/>
         <Text style={styles.ppwText}>픽업용 password</Text>
         <Text style={styles.infText}>보관함에서 픽업 시 입력하는 비밀번호입니다. 번호 4자리로 입력해주세요</Text>
-        <TextInput style={styles.input} />
-        <TouchableOpacity style={styles.button}>
+        <TextInput style={styles.input} onChangeText={setQuickPassword} value={quickPassword} />
+        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
