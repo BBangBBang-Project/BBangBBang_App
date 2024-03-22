@@ -19,9 +19,9 @@ const LogInScreen = ({navigation}) => {
   // 로그인 요청 함수
   const handleLogin = () => {
     axios
-      .post('http://localhost:8080/customer/signin', {
-        username,
-        password,
+      .post('http://localhost:8080/customer/signIn', {
+        username : username,
+        password : password,
       })
       .then(response => {
         // 로그인 성공 처리
