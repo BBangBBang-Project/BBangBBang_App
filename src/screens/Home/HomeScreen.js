@@ -1,39 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, ScrollView,StyleSheet, Modal, Text, TouchableOpacity } from 'react-native';
 import BreadCard from './components/BreadCard';
 import Header from '../../components/Header';
 import ModalScreen from './ModalScreen';
-
-const breadData = [
-  {
-    imageUrl: require("../../assets/images/bread.png"),
-    name: "쫄깃쫄깃 식빵",
-    originalPrice: "₩5,000",
-    salePrice: "₩2,500",
-  },
-  {
-    imageUrl: require("../../assets/images/bread.png"),
-    name: "쫄깃쫄깃 식빵",
-    originalPrice: "₩5,000",
-    salePrice: "₩2,500",
-  },
-  {
-    imageUrl: require("../../assets/images/bread.png"),
-    name: "쫄깃쫄깃 식빵",
-    originalPrice: "₩5,000",
-    salePrice: "₩2,500",
-  },
-  {
-    imageUrl: require("../../assets/images/bread.png"),
-    name: "쫄깃쫄깃 식빵",
-    originalPrice: "₩5,000",
-    salePrice: "₩2,500",
-  },
-];
+import BreadData from '../../data/BreadData';
 
 const HomeScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [breadData, setBreadData] = useState([]);
 
 // 모달을 보여주는 함수
   const showModal = (item) => {
@@ -50,6 +25,15 @@ const HomeScreen = ({ navigation }) => {
   const goToDetailScreen = (item) => {
     navigation.navigate('Detail', { item }); 
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await BreadData(); 
+      setBreadData(data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <View style={styles.container}>
