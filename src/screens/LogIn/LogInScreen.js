@@ -26,8 +26,7 @@ const LogInScreen = ({navigation}) => {
       .then(response => {
         // 로그인 성공 처리
         Alert.alert('로그인 성공', '로그인에 성공하였습니다.');
-        // 로그인 성공 후 필요한 로직 (예: 홈 화면으로 이동)
-        navigation.navigate('Home');
+        navigation.navigate('BottomTab');
       })
       .catch(error => {
         // 에러 처리

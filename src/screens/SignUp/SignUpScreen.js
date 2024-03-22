@@ -3,14 +3,14 @@ import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Dimensions,
 import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
-const SignUpScreen = () => {
+const SignUpScreen = ({navigation}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [quickPassword, setQuickPassword] = useState('');
 
-  const handleSignUp = ({navigation}) => {
+  const handleSignUp = () => {
     axios.post('http://localhost:8080/customer/signup', {
       username :username,
       password : password,
@@ -19,7 +19,7 @@ const SignUpScreen = () => {
     })
     .then(response => {
       Alert.alert("회원가입 성공", "회원가입이 성공적으로 완료되었습니다.");
-      navigation.navigate('Home');
+      navigation.navigate('BottomTab');
     })
     .catch(error => {
       Alert.alert("회원가입 실패", "오류가 발생했습니다. 다시 시도해주세요.");
