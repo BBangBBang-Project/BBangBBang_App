@@ -59,16 +59,16 @@ const styles = StyleSheet.create({
     listImageContainer : {
         marginTop : 20,
         marginLeft : 10,
-        width : 100,
-        height : 100,
+        width : 90,
+        height : 90,
         borderRadius: 50,
         backgroundColor : '#FAEBE1',
         alignItems: 'center',
         justifyContent: 'center',
     },
     listImage : {
-        width: '80%',
-        height: '80%',
+        width: '70%',
+        height: '70%',
         resizeMode :'contain',
     },
     listName : {
@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
     },
     salePrice : {
         marginTop : -60,
-        marginLeft : 295,
+        marginLeft : 290,
         color: 'rgba(225, 36, 36, 0.66)',
-        fontSize : 18,
+        fontSize : 17,
         
     },  
     originalPrice :{
@@ -88,10 +88,9 @@ const styles = StyleSheet.create({
         marginBottom : 20,
         textDecorationLine: 'line-through',
         marginLeft : 300,
-        fontSize : 15,
-
+        fontSize : 12,
+        color : '#9A9A9A',
     },
-
     buttonContainer : {
         flexDirection: 'row',
         marginBottom : 10,
@@ -101,12 +100,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         marginLeft : 170,
         width : 60,
-        height : 40,
+        height : 30,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius : 10,
-
-
+        borderRadius : 7,
         borderWidth: 1,
         borderColor : '#000000'
     }, 
@@ -119,10 +116,10 @@ const styles = StyleSheet.create({
         borderColor: '#FF7E7E',
         marginLeft : 20,
         width : 100,
-        height : 40,
+        height : 30,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius : 10,
+        borderRadius : 7,
       },
       inMyBagText: {
         color: '#FF7E7E',
