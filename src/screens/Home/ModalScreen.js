@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 const deviceWidth = Dimensions.get('window').width;
 
-const ModalScreen = ({ isVisible, onClose, itemName, itemPrice }) => {
+const ModalScreen = ({ isVisible, onClose, item }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (type) => {
@@ -20,7 +20,7 @@ const ModalScreen = ({ isVisible, onClose, itemName, itemPrice }) => {
     <Modal visible={isVisible} animationType="slide" transparent={true}>
       <View style={styles.modalOverlay}>
         <View style={styles.modalView}>
-          <Text style={styles.itemName}>{'쫄깃쫄깃 식빵'}</Text>
+          <Text style={styles.itemName}>{item.name}</Text>
           <View style={styles.quantityControl}>
   <View style={styles.quantityBox}>
     <TouchableOpacity onPress={() => handleQuantityChange('decrease')}>
@@ -31,7 +31,7 @@ const ModalScreen = ({ isVisible, onClose, itemName, itemPrice }) => {
       <Icon name = 'plus'style={styles.controlButton}></Icon>
     </TouchableOpacity>
   </View>
-            <Text style={styles.itemPrice}>{`${itemPrice}원`}</Text>
+            <Text style={styles.itemPrice}>{`${item.salePrice}원`}</Text>
           </View>
           <View style={styles.actionButtons}>
             <TouchableOpacity style={styles.cartButton} onPress={onClose}>
