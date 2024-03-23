@@ -1,17 +1,32 @@
 // ModalScreen.js
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Modal,Dimensions } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  Dimensions,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const deviceWidth = Dimensions.get('window').width;
 
-const ModalScreen = ({ isVisible, onClose, item }) => {
+const ModalScreen = ({isVisible, onClose, item}) => {
   const [quantity, setQuantity] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(item.salePrice);
 
-  const handleQuantityChange = (type) => {
-    if(type === 'increase') {
+  useEffect(() => {
+    // 수량이 변경될 때마다 총 가격을 업데이트
+    setTotalPrice(
+      quantity * parseFloat(item.salePrice.replace(/[^0-9-.]/g, '')),
+    );
+  }, [quantity, item.salePrice]);
+
+  const handleQuantityChange = type => {
+    if (type === 'increase') {
       setQuantity(prevQuantity => prevQuantity + 1);
-    } else if(type === 'decrease' && quantity > 1) {
+    } else if (type === 'decrease' && quantity > 1) {
       setQuantity(prevQuantity => prevQuantity - 1);
     }
   };
@@ -22,16 +37,18 @@ const ModalScreen = ({ isVisible, onClose, item }) => {
         <View style={styles.modalView}>
           <Text style={styles.itemName}>{item.name}</Text>
           <View style={styles.quantityControl}>
-  <View style={styles.quantityBox}>
-    <TouchableOpacity onPress={() => handleQuantityChange('decrease')}>
-      <Icon name = 'minus'style={styles.controlButton}></Icon>
-    </TouchableOpacity>
-    <Text style={styles.quantity}>{quantity}</Text>
-    <TouchableOpacity onPress={() => handleQuantityChange('increase')}>
-      <Icon name = 'plus'style={styles.controlButton}></Icon>
-    </TouchableOpacity>
-  </View>
-            <Text style={styles.itemPrice}>{`${item.salePrice}원`}</Text>
+            <View style={styles.quantityBox}>
+              <TouchableOpacity
+                onPress={() => handleQuantityChange('decrease')}>
+                <Icon name="minus" style={styles.controlButton}></Icon>
+              </TouchableOpacity>
+              <Text style={styles.quantity}>{quantity}</Text>
+              <TouchableOpacity
+                onPress={() => handleQuantityChange('increase')}>
+                <Icon name="plus" style={styles.controlButton}></Icon>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.itemPrice}>{`${totalPrice}원`}</Text>
           </View>
           <View style={styles.actionButtons}>
             <TouchableOpacity style={styles.cartButton} onPress={onClose}>
@@ -67,7 +84,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     fontSize: 20,
     textAlign: 'center',
-    fontFamily : 'ZenMaruGothic-Medium'
+    fontFamily: 'ZenMaruGothic-Medium',
   },
   quantityControl: {
     flexDirection: 'row',
@@ -75,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   quantityBox: {
-    marginTop : 10,
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -83,11 +100,11 @@ const styles = StyleSheet.create({
     borderColor: '#CFCFCF',
     paddingHorizontal: 10,
     paddingVertical: 5,
-    width : 90,
-    height : 30,
-    borderRadius : 10,
+    width: 90,
+    height: 30,
+    borderRadius: 10,
   },
-  
+
   controlButton: {
     fontSize: 15,
     marginHorizontal: 10,
@@ -96,7 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   itemPrice: {
-    marginTop : 10,
+    marginTop: 10,
     marginLeft: 100,
     fontSize: 16,
   },
@@ -110,31 +127,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginRight: 30,
-    width : 146,
-    height : 45,
+    width: 146,
+    height: 45,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius : 10,
-    marginTop : 10,
+    borderRadius: 10,
+    marginTop: 10,
   },
-  cartText : {
+  cartText: {
     color: 'black',
-    fontSize : 17,
+    fontSize: 17,
   },
   buyNowButton: {
     backgroundColor: '#FF7E7E',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    width : 146,
-    height : 45,
+    width: 146,
+    height: 45,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius : 10,
-    marginTop : 10,
+    borderRadius: 10,
+    marginTop: 10,
   },
   buyNowText: {
     color: 'white',
-    fontSize : 17,
+    fontSize: 17,
   },
 });
 
