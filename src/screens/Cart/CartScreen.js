@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DropDownPicker from 'react-native-dropdown-picker';
 import EmptyCart from './components/EmptyCart';
 import CartList from './components/CartList';
-const CartScreen = () => {
+const CartScreen = ({navigation}) => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
