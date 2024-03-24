@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import axios from 'axios';
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -31,6 +32,21 @@ const ModalScreen = ({isVisible, onClose, item}) => {
     }
   };
 
+  // 상품을 장바구니에 추가하는 함수
+const addToCart = () => {
+  axios.post('http://localhost:8080/customer/1/cart', {
+    breadId: item.id, // 상품 ID
+    quantity: quantity, // 선택한 수량
+  })
+  .then(response => {
+    console.log('장바구니에 추가됨:', response.data);
+    onClose(); // 모달 창 닫기
+  })
+  .catch(error => {
+    console.error('장바구니에 상품 추가 에러:', error);
+  });
+};
+
   return (
     <Modal visible={isVisible} animationType="slide" transparent={true}>
       <View style={styles.modalOverlay}>
@@ -51,7 +67,7 @@ const ModalScreen = ({isVisible, onClose, item}) => {
             <Text style={styles.itemPrice}>{`${totalPrice}원`}</Text>
           </View>
           <View style={styles.actionButtons}>
-            <TouchableOpacity style={styles.cartButton} onPress={onClose}>
+            <TouchableOpacity style={styles.cartButton} onPress={addToCart}>
               <Text style={styles.cartText}>장바구니</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buyNowButton} onPress={onClose}>
