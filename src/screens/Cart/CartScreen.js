@@ -62,6 +62,11 @@ const CartScreen = ({navigation}) => {
     setCartItems(updatedCartItems);
   };
 
+  // 각 항목의 수량을 모두 더하는 함수
+  const getTotalQuantity = () => {
+    return cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  };
+
   return (
     <View style={styles.cartScreenContainer}>
       <View
@@ -96,7 +101,9 @@ const CartScreen = ({navigation}) => {
         zIndexInverse={1000}
         placeholder="지점을 선택해주세요"
       />
-      <ScrollView contentContainerStyle={{paddingBottom: 100}}>
+      <ScrollView
+        style={styles.scrollViewStyle}
+        contentContainerStyle={{paddingBottom: 100}}>
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => (
             <CartList
@@ -109,6 +116,10 @@ const CartScreen = ({navigation}) => {
           <EmptyCart />
         )}
       </ScrollView>
+      <Text style={styles.quantityCount}>총 {getTotalQuantity()} 개</Text>
+      <TouchableOpacity style={styles.payButton}>
+        <Text style={styles.payButtonText}>결제하기</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -141,6 +152,26 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderBottomWidth: 1,
     borderColor: 'black',
+  },
+  quantityCount: {
+    marginLeft: 30,
+    fontSize: 17,
+    color: 'black',
+  },
+  payButton: {
+    backgroundColor: '#FFD1B2',
+    height: 47,
+    width: 180,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginBottom: 35,
+    borderRadius: 20,
+    marginTop: 20,
+  },
+  payButtonText: {
+    fontSize: 17,
+    color: 'black',
   },
 });
 
