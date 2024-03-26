@@ -1,9 +1,46 @@
-import React from 'react';
+import React, {useEffect, useState}from 'react';
 import PurchaseList from './components/PurchaseList';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import { View, Text, StyleSheet,TouchableOpacity,ScrollView,Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const PurchaseScreen = () => {
+    const navigation = useNavigation();
+    const route = useRoute();
+    const { from, item, count, customerId,orderInfo } = route.params;
+
+    useEffect(() => {
+        if (from === 'cart') {
+          // 장바구니 구매 API 호출
+          axios.post(`http://localhost:8080/customer/${customerId}/cart/purchase`)
+            .then(response => {
+              console.log('장바구니 구매 성공:', response.data);
+            })
+            .catch(error => {
+              console.error('장바구니 구매 실패:', error);
+            });
+        } else if (from === 'direct') {
+          // 바로 구매 API 호출
+          axios.post(`http://localhost:8080/customer/${customerId}/purchase`, { id: item.id, count: count })
+            .then(response => {
+              console.log('바로 구매 성공:', response.data);
+            })
+            .catch(error => {
+              console.error('바로 구매 실패:', error);
+            });
+        }
+      }, []);
+
+      // 총 가격 상태 추가
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(() => {
+        // 주문 상품의 가격을 합산하여 총 가격 계산
+        const calculatedTotalPrice = orderInfo.orderItems.reduce((acc, item) => acc + (item.price * 0.7 ), 0);
+        setTotalPrice(calculatedTotalPrice);
+    }, [orderInfo.orderItems]);
+
+    // const calculatedTotalPrice = orderInfo.orderItems.reduce((acc, item) => acc + (item.price * 0.7 * item.quantity), 0);
 
     return (
         <View style = {styles.purchaseScreenContainer}> 
@@ -21,16 +58,13 @@ const PurchaseScreen = () => {
                 <Text style = {styles.orderItemText}>주문 상품</Text>
             </View>
             <ScrollView style={styles.scrollViewStyle}>
-        <PurchaseList/>
-        <PurchaseList/>
-        <PurchaseList/>
-        <PurchaseList/>
-        <PurchaseList/>
-        <PurchaseList/> 
+            {orderInfo.orderItems.map((item, index) => (
+    <PurchaseList key={index} item={{...item, price: item.price * 0.7}} />
+  ))}
         </ScrollView>
         <View style = {styles.purchaseItemContainer}>
                 <Text style = {styles.purchaseText}>결제 금액</Text>
-                <Text style = {styles.priceText}>5,000원</Text>
+                <Text style = {styles.priceText}>{totalPrice}원</Text>
             </View>
             <TouchableOpacity style={styles.payButton}>
                 <Text style={styles.payButtonText}>결제하기</Text>

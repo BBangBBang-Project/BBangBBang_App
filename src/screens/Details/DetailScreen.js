@@ -8,6 +8,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import axios from 'axios';
 import Header from '../../components/Header';
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -38,6 +39,42 @@ const DetailScreen = () => {
   const navigateToNutrition = item => {
     navigation.navigate('Nutrition', {item});
   };
+
+    // 상품을 장바구니에 추가하는 함수
+const addToCart = () => {
+  axios.post('http://localhost:8080/customer/1/cart', {
+    breadId: item.id, // 상품 ID
+    quantity: quantity, // 선택한 수량
+  })
+  .then(response => {
+    console.log('장바구니에 추가됨:', response.data); // 모달 창 닫기
+  })
+  .catch(error => {
+    console.error('장바구니에 상품 추가 에러:', error);
+  });
+};
+
+// PurchaseScreen으로 네비게이션하며 item 데이터 전달
+const goToPurchaseScreen = () => {
+  // API 호출을 위한 URL 및 데이터 설정
+  const customerId = '1';
+  const url = `http://localhost:8080/customer/${customerId}/purchase`;
+  const data = {
+    id: item.id,
+    count: quantity,
+  };
+
+  // API 호출하여 구매 처리
+  axios.post(url, data)
+    .then(response => {
+      // 구매 성공 시, PurchaseScreen으로 네비게이션하며 주문 정보 전달
+      navigation.navigate('Purchase', { orderInfo: response.data });
+    })
+    .catch(error => {
+      console.error('구매 처리 중 에러 발생:', error);
+    });
+};
+
 
   return (
     <View style={styles.detailContainer}>
@@ -75,10 +112,10 @@ const DetailScreen = () => {
           <Text style={styles.itemPrice}>{`${totalPrice}원`}</Text>
         </View>
         <View style={styles.actionButtons}>
-          <TouchableOpacity style={styles.cartButton}>
+          <TouchableOpacity style={styles.cartButton} onPress={addToCart}>
             <Text style={styles.cartText}>장바구니</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buyNowButton}>
+          <TouchableOpacity style={styles.buyNowButton} onPress={goToPurchaseScreen}>
             <Text style={styles.buyNowText}>바로구매</Text>
           </TouchableOpacity>
         </View>

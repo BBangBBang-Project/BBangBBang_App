@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet,Text,Image } from 'react-native';
 
-const PurchaseList = () => {
+const PurchaseList = ({item}) => {
     return (
         <View style = {[styles.purchaseListContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             
@@ -9,13 +9,13 @@ const PurchaseList = () => {
             <View style = {styles.listImageContainer}>
                 <Image style = {styles.listImage}source={require('../../../assets/images/bread.png')}/>
             </View>
-            <Text style = {styles.listName}>쫄깃쫄깃 식빵</Text>
+            <Text style = {styles.listName}>{item.productName}</Text>
 
             <View style = {styles.quantityContainer}>
                 <Text style={styles.quantityTitle}>구매수량</Text>
-                <Text style={styles.quantityText}>1개</Text>
+                <Text style={styles.quantityText}>{item.quantity}개</Text>
                 </View>
-                <Text style={styles.priceText}>2,500원</Text>     
+                <Text style={styles.priceText}>{item.price}원</Text>     
         </View>
         </View>
     );
