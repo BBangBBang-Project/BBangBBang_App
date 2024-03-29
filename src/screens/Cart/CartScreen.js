@@ -11,7 +11,10 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import EmptyCart from './components/EmptyCart';
 import CartList from './components/CartList';
 import axios from 'axios';
-const CartScreen = ({navigation}) => {
+import {useNavigation} from '@react-navigation/native';
+const CartScreen = () => {
+
+  const navigation = useNavigation();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
@@ -29,6 +32,7 @@ const CartScreen = ({navigation}) => {
         const response = await axios.get(
           `http://localhost:8080/customer/${customerId}/cart`,
         );
+        console.log('장바구니 아이템 데이터:', response.data);
         setCartItems(response.data); // 응답 데이터를 상태에 저장
       } catch (error) {
         console.error(error);
@@ -37,6 +41,7 @@ const CartScreen = ({navigation}) => {
 
     fetchCartItems(); // 함수 호출
   }, []);
+  
   // 항목의 수량을 서버에 업데이트하는 함수
   const updateItemQuantity = async (customerId, cartItemId, newQuantity) => {
     try {
@@ -62,10 +67,55 @@ const CartScreen = ({navigation}) => {
     setCartItems(updatedCartItems);
   };
 
+  const handleDeleteCartItem = async (cartItemId) => {
+    try {
+      const customerId = '1';
+      // 서버에 장바구니 항목 삭제 요청 보내기
+      await axios.delete(`http://localhost:8080/customer/${customerId}/cart/items/${cartItemId}`);
+      
+      // 서버에서 항목 삭제가 완료되면 클라이언트 상태 업데이트
+      const updatedCartItems = cartItems.filter(item => item.cartItemId !== cartItemId);
+      setCartItems(updatedCartItems);
+  
+      // 장바구니가 비어 있는지 확인하고 결제 시도
+      if (updatedCartItems.length === 0) {
+        console.log('장바구니가 비어 있습니다.');
+        return;
+      }
+      
+      // 장바구니가 비어 있지 않다면 결제를 시도
+      goToPurchaseScreen(updatedCartItems);
+    } catch (error) {
+      console.error('물품 삭제 중 에러 발생:', error);
+    }
+  };
+  
+
   // 각 항목의 수량을 모두 더하는 함수
   const getTotalQuantity = () => {
     return cartItems.reduce((acc, item) => acc + item.quantity, 0);
   };
+
+// PurchaseScreen으로 네비게이션하며 item 데이터 전달
+const goToPurchaseScreen = (item) => {
+  // API 호출을 위한 URL 및 데이터 설정
+  const customerId = '1';
+  const url = `http://localhost:8080/customer/${customerId}/cart/purchase`;
+// 장바구니 항목에서 상품 id와 수량만 추출하여 구매 요청 데이터 생성
+const purchaseData = cartItems.map(item => ({
+  productId: item.id,
+  quantity: item.quantity,
+}));
+  // API 호출하여 구매 처리
+  axios.post(url, purchaseData)
+    .then(response => {
+      // 구매 성공 시, PurchaseScreen으로 네비게이션하며 주문 정보 전달
+      navigation.navigate('Purchase', { from: 'cart', customerId, orderInfo: response.data });
+    })
+    .catch(error => {
+      console.error('구매 처리 중 에러 발생:', error);
+    });
+};
 
   return (
     <View style={styles.cartScreenContainer}>
@@ -110,6 +160,7 @@ const CartScreen = ({navigation}) => {
               key={index}
               item={item}
               onQuantityChange={handleQuantityChange}
+              onDeleteCartItem={handleDeleteCartItem}
             />
           ))
         ) : (
@@ -117,7 +168,8 @@ const CartScreen = ({navigation}) => {
         )}
       </ScrollView>
       <Text style={styles.quantityCount}>총 {getTotalQuantity()} 개</Text>
-      <TouchableOpacity style={styles.payButton}>
+      <TouchableOpacity style={[styles.payButton, cartItems.length === 0 ? styles.payButtonEmpty : null]}
+        onPress={goToPurchaseScreen}>
         <Text style={styles.payButtonText}>결제하기</Text>
       </TouchableOpacity>
     </View>
@@ -172,6 +224,9 @@ const styles = StyleSheet.create({
   payButtonText: {
     fontSize: 17,
     color: 'black',
+  },
+  payButtonEmpty: {
+    backgroundColor: '#FAEBE1',
   },
 });
 

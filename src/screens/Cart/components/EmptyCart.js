@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, TouchableOpacity, StyleSheet,Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 
 const EmptyCart = () => {
 
+    const navigation = useNavigation();
+
+    const handleGoToMenu = () => {
+        navigation.navigate('BottomTab');
+    };
     return (
         <View style={styles.emptyCartContainer}>
-            <Icon style = {styles.cartIcon}name = "shoppingcart" size={200} color="black"></Icon>
+            <Icon style = {styles.cartIcon}name = "shoppingcart" size={150} color="black"></Icon>
             <Text style={styles.itisEmptyText}>장바구니가 비어있습니다. </Text>
             <Text style={styles.getMenuText}>원하는 메뉴를 장바구니에 담고</Text>
             <Text style={styles.orderText}>한 번에 주문해보세요</Text>
-            <TouchableOpacity>
-            <View style={styles.orderButton}>
+            <TouchableOpacity onPress={handleGoToMenu}>
+            <View style={styles.orderButton} >
                 <Text style={styles.buttonText}>메뉴 담으러 가기</Text>
             </View>
             </TouchableOpacity>
@@ -24,6 +30,7 @@ const EmptyCart = () => {
 const styles = StyleSheet.create({
 
     emptyCartContainer :{
+        marginTop : 140,
         flex : 1,
         alignItems : 'center',
         justifyContent : 'center'
@@ -32,28 +39,29 @@ const styles = StyleSheet.create({
         marginTop : -100,
     },
     itisEmptyText : {
-        fontSize : 22,
+        marginTop : 10,
+        fontSize : 20,
         fontWeight : 'bold'
     },
     getMenuText : {
         marginTop : 20,
-        fontSize : 17,
+        fontSize : 13,
     },
     orderText : {
         marginTop : 3,
-        fontSize : 17,
+        fontSize : 13,
     },
     orderButton : {
-        marginTop : 30,
+        marginTop : 10,
         backgroundColor : '#FFD1B2',
-        width : 200,
-        height : 45,
+        width : 150,
+        height : 40,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius : 20,
     },
     buttonText : {
-        fontSize : 15,
+        fontSize : 12,
         textAlign: 'center',
         fontWeight : 'bold'
     }

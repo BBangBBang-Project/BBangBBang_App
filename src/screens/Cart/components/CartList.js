@@ -2,14 +2,17 @@ import React, {useState} from 'react';
 import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
+import Icon3 from 'react-native-vector-icons/AntDesign';
+import axios from 'axios';
 
-const CartList = ({item, onQuantityChange}) => {
+const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
   const [isChecked, setIsChecked] = useState(false);
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
   };
 
   const [quantity, setQuantity] = useState(item.quantity);
+  const salePrice = parseInt(item.price * 0.7);
 
   const handleQuantityChange = type => {
     let newQuantity = quantity;
@@ -22,17 +25,29 @@ const CartList = ({item, onQuantityChange}) => {
     setQuantity(newQuantity);
     onQuantityChange(item.id, newQuantity);
   };
+
+// 장바구니 물품 삭제 함수 정의
+const handleDelete = () => {
+  onDeleteCartItem(item.cartItemId);
+};
+
+
   return (
     <View
       style={[
         styles.cartListContainer,
         {borderBottomColor: '#949393', borderBottomWidth: 1},
       ]}>
+        <View style={styles.iconContainer}>
       <TouchableOpacity onPress={toggleCheckbox}>
         <Icon
           style={styles.checkbox}
           name={isChecked ? 'checkbox' : 'checkbox-outline'}></Icon>
       </TouchableOpacity>
+      <TouchableOpacity onPress={handleDelete}>
+        <Icon3 style={styles.delteIcon} name='delete'></Icon3>
+      </TouchableOpacity>
+      </View>
 
       <View style={styles.rowCartContainer}>
         <View style={styles.listImageContainer}>
@@ -52,7 +67,7 @@ const CartList = ({item, onQuantityChange}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.priceContainer}>
-          <Text style={styles.salePrice}>{item.price}</Text>
+          <Text style={styles.salePrice}>{salePrice}</Text>
           <Text style={styles.originalPrice}>{item.price}</Text>
         </View>
       </View>
@@ -65,14 +80,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  iconContainer : {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
   rowCartContainer: {
     flexDirection: 'row',
   },
   checkbox: {
-    marginTop: 10,
     marginLeft: 15,
     fontSize: 23,
     color: '#FF7E7E',
+  },
+  delteIcon :{
+    fontSize: 13,
+    marginLeft : 310,
   },
   listImageContainer: {
     marginTop: 10,

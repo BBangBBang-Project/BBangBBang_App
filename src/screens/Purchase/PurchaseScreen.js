@@ -3,6 +3,7 @@ import PurchaseList from './components/PurchaseList';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import { View, Text, StyleSheet,TouchableOpacity,ScrollView,Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
 
 const PurchaseScreen = () => {
     const navigation = useNavigation();
@@ -41,7 +42,7 @@ const PurchaseScreen = () => {
     }, [orderInfo.orderItems]);
 
     // const calculatedTotalPrice = orderInfo.orderItems.reduce((acc, item) => acc + (item.price * 0.7 * item.quantity), 0);
-
+    const totalPriceInteger = parseInt(totalPrice);
     return (
         <View style = {styles.purchaseScreenContainer}> 
         <View style = {styles.titleContainer}>
@@ -64,7 +65,7 @@ const PurchaseScreen = () => {
         </ScrollView>
         <View style = {styles.purchaseItemContainer}>
                 <Text style = {styles.purchaseText}>결제 금액</Text>
-                <Text style = {styles.priceText}>{totalPrice}원</Text>
+                <Text style = {styles.priceText}>{totalPriceInteger}원</Text>
             </View>
             <TouchableOpacity style={styles.payButton}>
                 <Text style={styles.payButtonText}>결제하기</Text>

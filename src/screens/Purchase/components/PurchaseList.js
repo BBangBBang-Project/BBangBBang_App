@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet,Text,Image } from 'react-native';
 
 const PurchaseList = ({item}) => {
+    const purchasePrice = parseInt(item.price);
     return (
         <View style = {[styles.purchaseListContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             
@@ -15,7 +16,7 @@ const PurchaseList = ({item}) => {
                 <Text style={styles.quantityTitle}>구매수량</Text>
                 <Text style={styles.quantityText}>{item.quantity}개</Text>
                 </View>
-                <Text style={styles.priceText}>{item.price}원</Text>     
+                <Text style={styles.priceText}>{purchasePrice}원</Text>     
         </View>
         </View>
     );
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
         marginLeft : -100,
     }, 
     quantityTitle : {
+        marginLeft : 50,
         color : '#4C4C4C',
         fontSize : 17,
     },
