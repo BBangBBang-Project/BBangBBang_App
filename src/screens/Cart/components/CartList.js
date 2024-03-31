@@ -14,7 +14,9 @@ const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const salePrice = parseInt(item.price * 0.7);
 
-  const handleQuantityChange = type => {
+  const handleQuantityChange = async(type) => {
+    const customerId = '1'; // 예시로 '1'을 사용
+    const { cartItemId } = item; // 카트 아이템의 ID
     let newQuantity = quantity;
     if (type === 'increase') {
       newQuantity = quantity + 1;
@@ -23,8 +25,17 @@ const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
     }
 
     setQuantity(newQuantity);
-    onQuantityChange(item.id, newQuantity);
-  };
+    
+    try {
+      const response = await axios.patch(
+          `http://localhost:8080/customer/${customerId}/cart/items/${cartItemId}`,
+          { quantity: newQuantity }
+      );
+      console.log('수량 업데이트 성공:', response.data);
+  } catch (error) {
+      console.error('수량 업데이트 실패:', error);
+  }
+};
 
 // 장바구니 물품 삭제 함수 정의
 const handleDelete = () => {

@@ -8,17 +8,17 @@ import axios from 'axios';
 const PurchaseScreen = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { from, item, count, customerId,orderInfo } = route.params;
+    const { from, item, count, customerId,orderInfo,cartItems } = route.params;
 
     useEffect(() => {
         if (from === 'cart') {
           // 장바구니 구매 API 호출
-          axios.post(`http://localhost:8080/customer/${customerId}/cart/purchase`)
+          axios.get(`http://localhost:8080/customer/${customerId}/cart`)
             .then(response => {
-              console.log('장바구니 구매 성공:', response.data);
+              console.log('장바구니 불러오기 성공:', response.data);
             })
             .catch(error => {
-              console.error('장바구니 구매 실패:', error);
+              console.error('장바구니 불러오기 실패:', error);
             });
         } else if (from === 'direct') {
           // 바로 구매 API 호출
@@ -43,6 +43,29 @@ const PurchaseScreen = () => {
 
     // const calculatedTotalPrice = orderInfo.orderItems.reduce((acc, item) => acc + (item.price * 0.7 * item.quantity), 0);
     const totalPriceInteger = parseInt(totalPrice);
+
+    // PurchaseScreen으로 네비게이션하며 item 데이터 전달
+    const goToPurchaseScreen = () => {
+    // API 호출을 위한 URL 및 데이터 설정
+        const customerId = '1';
+        const url = `http://localhost:8080/customer/${customerId}/cart/purchase`;
+    // 장바구니 항목에서 상품 id와 수량만 추출하여 구매 요청 데이터 생성
+    const purchaseData = cartItems.map(item => ({
+        productId: item.id,
+        quantity: item.quantity,
+    }));
+    // API 호출하여 구매 처리
+    axios.post(url, purchaseData)
+        .then(response => {
+        // 구매 성공 시, PurchaseScreen으로 네비게이션하며 주문 정보 전달
+        navigation.navigate('Purchase', { from: 'cart', customerId, orderInfo: response.data });
+        })
+        .catch(error => {
+        console.error('구매 처리 중 에러 발생:', error);
+        });
+    };
+
+    
     return (
         <View style = {styles.purchaseScreenContainer}> 
         <View style = {styles.titleContainer}>
@@ -67,7 +90,7 @@ const PurchaseScreen = () => {
                 <Text style = {styles.purchaseText}>결제 금액</Text>
                 <Text style = {styles.priceText}>{totalPriceInteger}원</Text>
             </View>
-            <TouchableOpacity style={styles.payButton}>
+            <TouchableOpacity style={styles.payButton} onPress={goToPurchaseScreen}>
                 <Text style={styles.payButtonText}>결제하기</Text>
             </TouchableOpacity>
         </View>

@@ -23,6 +23,8 @@ const CartScreen = () => {
     {label: '성신여대역', value: '성신'},
   ]);
   const [cartItems, setCartItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState({}); // 체크된 상품 수량을 관리
+
 
   useEffect(() => {
     // 장바구니 데이터를 가져오는 함수
@@ -96,25 +98,10 @@ const CartScreen = () => {
     return cartItems.reduce((acc, item) => acc + item.quantity, 0);
   };
 
-// PurchaseScreen으로 네비게이션하며 item 데이터 전달
-const goToPurchaseScreen = (item) => {
-  // API 호출을 위한 URL 및 데이터 설정
-  const customerId = '1';
-  const url = `http://localhost:8080/customer/${customerId}/cart/purchase`;
-// 장바구니 항목에서 상품 id와 수량만 추출하여 구매 요청 데이터 생성
-const purchaseData = cartItems.map(item => ({
-  productId: item.id,
-  quantity: item.quantity,
-}));
-  // API 호출하여 구매 처리
-  axios.post(url, purchaseData)
-    .then(response => {
-      // 구매 성공 시, PurchaseScreen으로 네비게이션하며 주문 정보 전달
-      navigation.navigate('Purchase', { from: 'cart', customerId, orderInfo: response.data });
-    })
-    .catch(error => {
-      console.error('구매 처리 중 에러 발생:', error);
-    });
+// PurchaseScreen으로 네비게이션하며 cartItems 데이터 전달
+const goToPurchaseScreen = (cartItems) => {
+  // Navigate to PurchaseScreen with cartItems data
+  navigation.navigate('Purchase', { from: 'cart', cartItems });
 };
 
   return (
