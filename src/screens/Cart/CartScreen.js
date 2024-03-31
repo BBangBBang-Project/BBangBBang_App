@@ -101,7 +101,7 @@ const CartScreen = () => {
 // PurchaseScreen으로 네비게이션하며 cartItems 데이터 전달
 const goToPurchaseScreen = (cartItems) => {
   // Navigate to PurchaseScreen with cartItems data
-  navigation.navigate('Purchase', { from: 'cart', cartItems });
+  navigation.navigate('Purchase', { from: 'cart', cartItems, customerId :'1'});
 };
 
   return (
@@ -156,7 +156,7 @@ const goToPurchaseScreen = (cartItems) => {
       </ScrollView>
       <Text style={styles.quantityCount}>총 {getTotalQuantity()} 개</Text>
       <TouchableOpacity style={[styles.payButton, cartItems.length === 0 ? styles.payButtonEmpty : null]}
-        onPress={goToPurchaseScreen}>
+       onPress={() => goToPurchaseScreen(cartItems)}>
         <Text style={styles.payButtonText}>결제하기</Text>
       </TouchableOpacity>
     </View>

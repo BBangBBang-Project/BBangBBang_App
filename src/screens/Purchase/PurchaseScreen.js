@@ -8,17 +8,27 @@ import axios from 'axios';
 const PurchaseScreen = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { from, item, count, customerId,orderInfo,cartItems } = route.params;
+    const { from, item, count, customerId,cartItems } = route.params;
+    const [totalPrice, setTotalPrice] = useState(0);
+    
+    const calculateTotalPrice = (data) => {
+        return data.reduce((acc, item) => {
+            return acc + item.price * item.quantity * 0.7;
+        }, 0);
+    };
+    
 
     useEffect(() => {
         if (from === 'cart') {
           // 장바구니 구매 API 호출
           axios.get(`http://localhost:8080/customer/${customerId}/cart`)
             .then(response => {
-              console.log('장바구니 불러오기 성공:', response.data);
+              console.log('결제하기 불러오기 성공:', response.data);
+              const totalPrice = calculateTotalPrice(response.data);
+                setTotalPrice(totalPrice);
             })
             .catch(error => {
-              console.error('장바구니 불러오기 실패:', error);
+              console.error('결제하기 불러오기 실패:', error);
             });
         } else if (from === 'direct') {
           // 바로 구매 API 호출
@@ -33,15 +43,8 @@ const PurchaseScreen = () => {
       }, []);
 
       // 총 가격 상태 추가
-    const [totalPrice, setTotalPrice] = useState(0);
 
-    useEffect(() => {
-        // 주문 상품의 가격을 합산하여 총 가격 계산
-        const calculatedTotalPrice = orderInfo.orderItems.reduce((acc, item) => acc + (item.price * 0.7 ), 0);
-        setTotalPrice(calculatedTotalPrice);
-    }, [orderInfo.orderItems]);
 
-    // const calculatedTotalPrice = orderInfo.orderItems.reduce((acc, item) => acc + (item.price * 0.7 * item.quantity), 0);
     const totalPriceInteger = parseInt(totalPrice);
 
     // PurchaseScreen으로 네비게이션하며 item 데이터 전달
@@ -58,7 +61,7 @@ const PurchaseScreen = () => {
     axios.post(url, purchaseData)
         .then(response => {
         // 구매 성공 시, PurchaseScreen으로 네비게이션하며 주문 정보 전달
-        navigation.navigate('Purchase', { from: 'cart', customerId, orderInfo: response.data });
+        navigation.navigate('Purchase', { from: 'cart', customerId, item });
         })
         .catch(error => {
         console.error('구매 처리 중 에러 발생:', error);
@@ -82,9 +85,9 @@ const PurchaseScreen = () => {
                 <Text style = {styles.orderItemText}>주문 상품</Text>
             </View>
             <ScrollView style={styles.scrollViewStyle}>
-            {orderInfo.orderItems.map((item, index) => (
+            {cartItems && cartItems.map((item, index) => (
     <PurchaseList key={index} item={{...item, price: item.price * 0.7}} />
-  ))}
+    ))}
         </ScrollView>
         <View style = {styles.purchaseItemContainer}>
                 <Text style = {styles.purchaseText}>결제 금액</Text>
