@@ -8,7 +8,7 @@ import axios from 'axios';
 const PurchaseScreen = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { from, item, count, customerId,cartItems } = route.params;
+    const { from, item, quantity, customerId,cartItems } = route.params;
     const [totalPrice, setTotalPrice] = useState(0);
     
     const calculateTotalPrice = (data) => {
@@ -17,7 +17,6 @@ const PurchaseScreen = () => {
         }, 0);
     };
     
-
     useEffect(() => {
         if (from === 'cart') {
           // 장바구니 구매 API 호출
@@ -25,6 +24,7 @@ const PurchaseScreen = () => {
             .then(response => {
               console.log('결제하기 불러오기 성공:', response.data);
               const totalPrice = calculateTotalPrice(response.data);
+
                 setTotalPrice(totalPrice);
             })
             .catch(error => {
@@ -32,13 +32,22 @@ const PurchaseScreen = () => {
             });
         } else if (from === 'direct') {
           // 바로 구매 API 호출
-          axios.post(`http://localhost:8080/customer/${customerId}/purchase`, { id: item.id, count: count })
+          axios.post(`http://localhost:8080/customer/${customerId}/checkout`, {id : item.breadId, count: quantity})
             .then(response => {
               console.log('바로 구매 성공:', response.data);
+              setTotalPrice(item.price * quantity * 0.7);
+              console.log('id: ', item.breadId);
+              console.log('q:', quantity)
             })
             .catch(error => {
               console.error('바로 구매 실패:', error);
+              console.log('item:', item)
+              
+              console.log('q:', quantity)
+              console.log('id: ', item.breadId);
             });
+            //구매 시에는 바로 구매한 상품의 데이터를 totalPrice로 설정
+            //setTotalPrice(item.salePrice * quantity * 0.7);
         }
       }, []);
 
@@ -48,12 +57,13 @@ const PurchaseScreen = () => {
     const totalPriceInteger = parseInt(totalPrice);
 
     // PurchaseScreen으로 네비게이션하며 item 데이터 전달
-    const goToPurchaseScreen = () => {
+    const goToPurchaseComplete = () => {
     // API 호출을 위한 URL 및 데이터 설정
         const customerId = '1';
         const url = `http://localhost:8080/customer/${customerId}/cart/purchase`;
     // 장바구니 항목에서 상품 id와 수량만 추출하여 구매 요청 데이터 생성
-    const purchaseData = cartItems.map(item => ({
+    const safeCartItems = cartItems || [];
+    const purchaseData = safeCartItems.map(item => ({
         productId: item.id,
         quantity: item.quantity,
     }));
@@ -61,7 +71,8 @@ const PurchaseScreen = () => {
     axios.post(url, purchaseData)
         .then(response => {
         // 구매 성공 시, PurchaseScreen으로 네비게이션하며 주문 정보 전달
-        navigation.navigate('Purchase', { from: 'cart', customerId, item });
+        navigation.navigate('Complete', {customerId, item });
+        console.log('구매 완료 : ',item);
         })
         .catch(error => {
         console.error('구매 처리 중 에러 발생:', error);
@@ -88,12 +99,15 @@ const PurchaseScreen = () => {
             {cartItems && cartItems.map((item, index) => (
     <PurchaseList key={index} item={{...item, price: item.price * 0.7}} />
     ))}
+    {item && (
+    <PurchaseList key={-1} item={{...item, price: item.price * 0.7}} />
+  )}
         </ScrollView>
         <View style = {styles.purchaseItemContainer}>
                 <Text style = {styles.purchaseText}>결제 금액</Text>
                 <Text style = {styles.priceText}>{totalPriceInteger}원</Text>
             </View>
-            <TouchableOpacity style={styles.payButton} onPress={goToPurchaseScreen}>
+            <TouchableOpacity style={styles.payButton} onPress={goToPurchaseComplete}>
                 <Text style={styles.payButtonText}>결제하기</Text>
             </TouchableOpacity>
         </View>

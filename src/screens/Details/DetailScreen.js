@@ -55,23 +55,26 @@ const addToCart = () => {
 };
 
 // PurchaseScreen으로 네비게이션하며 item 데이터 전달
-const goToPurchaseScreen = () => {
+const goToPurchaseScreen = (item) => {
   // API 호출을 위한 URL 및 데이터 설정
   const customerId = '1';
-  const url = `http://localhost:8080/customer/${customerId}/purchase`;
-  const data = {
+  const url = `http://localhost:8080/customer/${customerId}/checkout`;
+  const purchaseData = { 
     id: item.id,
-    count: quantity,
+    count : quantity,
   };
 
   // API 호출하여 구매 처리
-  axios.post(url, data)
+  axios.post(url, purchaseData)
     .then(response => {
       // 구매 성공 시, PurchaseScreen으로 네비게이션하며 주문 정보 전달
-      navigation.navigate('Purchase', { orderInfo: response.data });
+      navigation.navigate('Purchase', { from: 'direct', item:response.data, id: item.id, quantity:quantity,customerId :'1'});
+      console.log('넘겨준 데이터:', response.data);
+      console.log('id: ', item.id);
+      console.log('quantity:', quantity);
     })
     .catch(error => {
-      console.error('구매 처리 중 에러 발생:', error);
+      console.error('데이터 넘기는 중 에러 발생:', error);
     });
 };
 
@@ -115,7 +118,7 @@ const goToPurchaseScreen = () => {
           <TouchableOpacity style={styles.cartButton} onPress={addToCart}>
             <Text style={styles.cartText}>장바구니</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buyNowButton} onPress={goToPurchaseScreen}>
+          <TouchableOpacity style={styles.buyNowButton} onPress={() => goToPurchaseScreen(item)}>
             <Text style={styles.buyNowText}>바로구매</Text>
           </TouchableOpacity>
         </View>

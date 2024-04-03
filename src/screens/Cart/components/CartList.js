@@ -32,6 +32,7 @@ const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
           { quantity: newQuantity }
       );
       console.log('수량 업데이트 성공:', response.data);
+      
   } catch (error) {
       console.error('수량 업데이트 실패:', error);
   }

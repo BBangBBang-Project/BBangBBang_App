@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Icon2 from 'react-native-vector-icons/Octicons'
+import Icon2 from 'react-native-vector-icons/Octicons';
+import {useNavigation} from '@react-navigation/native';
 
 const PurchaseComplete = () => {
 
+    const navigation = useNavigation();
     return (
+
         <View style = {styles.purchaseCompleteContainer}> 
         <View style = {styles.titleContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => navigation.navigate('BottomTab')}>
                 <Icon style={styles.goBackButton} name = "chevron-back-outline"></Icon>
             </TouchableOpacity>
             <Text style={styles.titleText}>주문 완료</Text>

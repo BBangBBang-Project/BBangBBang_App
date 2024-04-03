@@ -23,8 +23,6 @@ const CartScreen = () => {
     {label: '성신여대역', value: '성신'},
   ]);
   const [cartItems, setCartItems] = useState([]);
-  const [checkedItems, setCheckedItems] = useState({}); // 체크된 상품 수량을 관리
-
 
   useEffect(() => {
     // 장바구니 데이터를 가져오는 함수
@@ -69,6 +67,8 @@ const CartScreen = () => {
     setCartItems(updatedCartItems);
   };
 
+  
+
   const handleDeleteCartItem = async (cartItemId) => {
     try {
       const customerId = '1';
@@ -84,9 +84,6 @@ const CartScreen = () => {
         console.log('장바구니가 비어 있습니다.');
         return;
       }
-      
-      // 장바구니가 비어 있지 않다면 결제를 시도
-      goToPurchaseScreen(updatedCartItems);
     } catch (error) {
       console.error('물품 삭제 중 에러 발생:', error);
     }
