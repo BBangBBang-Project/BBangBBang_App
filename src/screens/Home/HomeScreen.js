@@ -2,24 +2,13 @@ import React, {useState, useEffect} from 'react';
 import { View, ScrollView,StyleSheet, Modal, Text, TouchableOpacity } from 'react-native';
 import BreadCard from './components/BreadCard';
 import Header from '../../components/Header';
-import ModalScreen from './ModalScreen';
 import BreadData from '../../data/BreadData';
 
 const HomeScreen = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+
   const [breadData, setBreadData] = useState([]);
-
-// 모달을 보여주는 함수
-  const showModal = (item) => {
-    setSelectedItem(item);
-    setModalVisible(true);
-  };
-
-  // 모달을 숨기는 함수
-  const hideModal = () => {
-    setModalVisible(false);
-  };
+ // const [customerId, setCustomerId] = useState(null);
+  const customerId = '1';
 
 // DetailScreen으로 네비게이션하며 item 데이터 전달
   const goToDetailScreen = (item) => {
@@ -34,6 +23,17 @@ const HomeScreen = ({ navigation }) => {
 
     fetchData();
   }, []);
+
+  // Fetch customer id
+
+  // useEffect(() => {
+  //   const fetchCustomerId = async () => {
+  //     const customerId = await getCustomerIdFromSomewhere();
+  //     setCustomerId(customerId);
+  //   };
+
+  //   fetchCustomerId();
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -51,27 +51,14 @@ const HomeScreen = ({ navigation }) => {
               name={bread.name}
               originalPrice={bread.originalPrice}
               salePrice={bread.salePrice}
-              onAddPress={() => showModal(bread)}
               onCardPress={() => goToDetailScreen(bread)}
+              customerId={customerId}
+              productId={bread.id}
             />
           ))}
         </View>
       </ScrollView>
       </View> 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={hideModal}>
-        <TouchableOpacity
-          style={styles.modalOverlay}
-          activeOpacity={1}
-          onPress={hideModal}>
-          <View style={styles.modalContainer} >
-          <ModalScreen item={selectedItem} onClose={hideModal} isVisible={modalVisible} />
-          </View>
-        </TouchableOpacity>
-      </Modal>
     </View>
   );
 };
@@ -92,16 +79,6 @@ const styles = StyleSheet.create({
     cardContainer:{
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    modalOverlay: {
-      flex: 1,
-      justifyContent: 'flex-end', // 모달을 화면의 바닥에 맞추기
-      backgroundColor: 'rgba(0,0,0,0.5)', // 배경 투명도 조정
-    },
-    modalContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'white'
     },
 });
 

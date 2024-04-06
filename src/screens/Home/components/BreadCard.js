@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import AddButton from './AddButton';
-
+import LikeButton from './LikeButton';
 const BreadCard = ({
   imageUrl,
   name,
   originalPrice,
   salePrice,
-  onAddPress,
   onCardPress,
+  customerId,
+  productId
 }) => {
   return (
     <TouchableOpacity onPress={onCardPress} style={styles.cardTouchable}>
@@ -19,8 +19,8 @@ const BreadCard = ({
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.originalPrice}>{originalPrice}</Text>
         <Text style={styles.salePrice}>{salePrice}</Text>
-        <View style={styles.addButtonContainer}>
-          <AddButton onPress={onAddPress} />
+        <View style={styles.likeButtonContainer}>
+          <LikeButton productId={productId} customerId={customerId} />
         </View>
       </View>
     </TouchableOpacity>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     color: 'rgba(225, 36, 36, 0.66)',
     marginTop: 1,
   },
-  addButtonContainer: {
+  likeButtonContainer: {
     position: 'absolute',
     bottom: 13,
     right: 10,
