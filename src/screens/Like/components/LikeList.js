@@ -1,42 +1,69 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet,Text,Image } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React from 'react';
+import { View, TouchableOpacity, StyleSheet,Text,Image,Alert } from 'react-native';
+import axios from 'axios';
+import LikeButton from '../../Home/components/LikeButton';
 
-const LikeList = () => {
+const LikeList = ({ item, customerId, onDelete }) => {
+    const { name, price} = item;
+    const salePrice = parseInt(price * 0.7);
 
-    const [isChecked, setIsChecked] = useState(false);
-    const toggleCheckbox = () => {
-        setIsChecked(!isChecked);
+  // 상품을 찜 목록에서 삭제하는 함수
+    const removeFromFavorites = async () => {
+        try {
+        const response = await axios.delete(
+            `http://localhost:8080/customer/${customerId}/favorite`,
+            { data:{id: item.productId} }
+        );
+        if (response.status === 200) {
+            onDelete(item.productId);
+            Alert.alert('찜 목록에서 삭제되었습니다!');
+        }
+        } catch (error) {
+        console.error('찜 목록 삭제 에러:', error);
+        console.log("name : ", name)
+        console.log("id  : ", item.productId)
+        console.log('liked : ', setLiked);
+        
+        }
     };
 
+        // 상품을 장바구니에 추가하는 함수
+    const addToCart = () => {
+        axios.post('http://localhost:8080/customer/1/cart', {
+        breadId: item.productId, // 상품 ID
+        quantity: 1, // 선택한 수량
+        })
+        .then(response => {
+        console.log('장바구니에 추가됨:', response.data); // 모달 창 닫기
+        })
+        .catch(error => {
+            console.error('장바구니에 상품 추가 에러:', error);
+        });
+    };
+    
     return (
         <View style = {[styles.likeListContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             <View style = {styles.rowLikeContainer}>
-            <TouchableOpacity onPress={toggleCheckbox}>
-                <Icon style={styles.checkbox} name={isChecked ? "checkbox-outline" : "checkbox"}></Icon>
-            </TouchableOpacity>
 
             <View style = {styles.listImageContainer}>
                 <Image style = {styles.listImage}source={require('../../../assets/images/bread.png')}/>
             </View>
 
-            <Text style = {styles.listName}>쫄깃쫄깃 식빵</Text>
+            <Text style = {styles.listName}>{name}</Text>
             </View>
             <View style = {styles.priceContainer}>
-            <Text style={styles.originalPrice}>5,000원</Text>  
-                <Text style={styles.salePrice}>2,500원</Text>
-            
+            <Text style={styles.originalPrice}>{price}원</Text>  
+            <Text style={styles.salePrice}>{salePrice}원</Text>      
         </View>
        
         <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.deleteButton} >
+        <TouchableOpacity style={styles.deleteButton} onPress={removeFromFavorites} >
               <Text style={styles.deleteText}>삭제</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.inMyBagButton}>
+            <TouchableOpacity style={styles.inMyBagButton} onPress={addToCart}>
               <Text style={styles.inMyBagText}>장바구니 담기</Text>
             </TouchableOpacity>
             </View>
-
         </View>
     );
 };
@@ -50,31 +77,25 @@ const styles = StyleSheet.create({
     rowLikeContainer : {
         flexDirection: 'row',
     },
-    checkbox : {
-        marginTop : 10,
-        marginLeft : 15,
-        fontSize : 25,
-        color : '#FF7E7E',
-    },
     listImageContainer : {
         marginTop : 20,
-        marginLeft : 10,
-        width : 90,
-        height : 90,
+        marginLeft : 30,
+        width : 95,
+        height : 95,
         borderRadius: 50,
         backgroundColor : '#FAEBE1',
         alignItems: 'center',
         justifyContent: 'center',
     },
     listImage : {
-        width: '70%',
-        height: '70%',
+        width: '75%',
+        height: '75%',
         resizeMode :'contain',
     },
     listName : {
         fontSize : 20,
-        marginTop : 20,
-        marginLeft : 10,
+        marginTop : 30,
+        marginLeft : 45,
     },
     salePrice : {
         marginTop : -60,

@@ -1,12 +1,38 @@
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React,{ useState,useEffect } from 'react';
+import { useNavigation,useIsFocused } from '@react-navigation/native';
 import LikeList from './components/LikeList';
-import { View, Text, StyleSheet,TouchableOpacity,ScrollView } from 'react-native';
+import { View, Text, StyleSheet,TouchableOpacity,ScrollView,Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
 
 const LikeScreen = () => {
-
     const navigation = useNavigation();
+    const isFocused = useIsFocused(); // 페이지 포커스 상태 확인
+    const [likeList, setLikeList] = useState([]);
+    const customerId = 1;
+
+    useEffect(() => {
+        const fetchLikeList = async () => {
+            if (isFocused){
+            try {
+                const response = await axios.get(`http://localhost:8080/customer/${customerId}/favorite`);
+                setLikeList(response.data);
+                
+                console.log("product : ",response.data);
+            } catch (error) {
+                console.error('Error fetching like list:', error);
+                console.log("product : ",response.data);
+            }
+        }
+        };
+        fetchLikeList();
+        }, [isFocused]);
+
+        // 삭제 콜백 함수
+    const removeFromFavorites = productId => {
+        setLikeList(prevList => prevList.filter(likedItem => likedItem.productId !== productId));
+        Alert.alert('찜 목록에서 삭제되었습니다!');
+    };
 
     return (
         <View style = {styles.likeScreenContainer}> 
@@ -17,11 +43,9 @@ const LikeScreen = () => {
             <Text style={styles.titleText}>찜한 상품 </Text>
             </View>
             <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-        <LikeList/>
-        <LikeList/>
-        <LikeList/>
-        <LikeList/>
-        <LikeList/>
+            {likeList.map((item) => (
+          <LikeList key={item.favorite_id} item={item} onDelete={removeFromFavorites} customerId={customerId}/>
+        ))}
         </ScrollView>
         </View>
         
@@ -34,23 +58,22 @@ const styles = StyleSheet.create({
         backgroundColor : 'white',
         
     },
-    titleContainer : {
-        justifyContent : 'flex-start',
-        alignContent : 'center',
+    titleContainer: {
+        justifyContent: 'flex-start',
+        alignContent: 'center',
         flexDirection: 'row',
-    },
-    goBackButton : {
-        marginLeft : 10,
-        marginTop : 60,
-        fontSize : 40,
-    },
-    titleText : {
-        marginTop : 40,
-        marginLeft : 20,
-        fontSize : 40,
-        marginBottom : 40,
-
-    }
+        marginTop: 50,
+      },
+      goBackButton: {
+        marginLeft: 10,
+        fontSize: 40,
+        marginBottom: 20,
+      },
+      titleText: {
+        marginLeft: 20,
+        fontSize: 30,
+        fontFamily: 'Syncopate',
+      },
 });
 
 export default LikeScreen;
