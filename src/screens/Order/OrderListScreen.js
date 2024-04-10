@@ -1,13 +1,32 @@
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, {useEffect,useState} from 'react';
+import { useNavigation,useIsFocused } from '@react-navigation/native';
 import OrderList from './components/OrderList';
 import { View, Text, StyleSheet,TouchableOpacity,ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
 
 const OrderListScreen = () => {
 
     const navigation = useNavigation();
+    const customerId = 2;
+    const [orders, setOrders] = useState([]);
 
+    useEffect(() => {
+            axios.get(`http://localhost:8080/customer/${customerId}/orders`)
+                .then(response => {
+                    setOrders(response.data); // 응답 데이터로 상태 업데이트
+                    console.log("data : ",response.data)
+                    orders.forEach((order, orderIndex) => {
+                        console.log(`Order ${orderIndex + 1}의 orderItems:`);
+                        order.orderItems.forEach((item, itemIndex) => {
+                          console.log(`Item ${itemIndex + 1}:`, item);
+                        });
+                      });
+                })
+                .catch(error => {
+                    console.error('Error fetching orders:', error);
+                });
+    }, []);
     return (
         <View style = {styles.orderScreenContainer}> 
         <View style = {[styles.titleContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
@@ -17,11 +36,9 @@ const OrderListScreen = () => {
             <Text style={styles.titleText}>주문 내역 조회 </Text>
             </View>
             <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-        <OrderList/>
-        <OrderList/>
-        <OrderList/>
-        <OrderList/>
-        <OrderList/>
+            {orders.map((order, index) => (
+                <OrderList key={index} order={order} /> // 주문 데이터를 props로 전달
+            ))}
         </ScrollView>
         </View>
         
