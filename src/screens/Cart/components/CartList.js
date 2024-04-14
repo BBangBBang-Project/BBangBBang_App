@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
+import { MY_IP_ADDRESS } from '../../../config/config';
 
 const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -28,7 +29,7 @@ const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
     
     try {
       const response = await axios.patch(
-          `http://localhost:8080/customer/${customerId}/cart/items/${cartItemId}`,
+          `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart/items/${cartItemId}`,
           { quantity: newQuantity }
       );
       console.log('수량 업데이트 성공:', response.data);

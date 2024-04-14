@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet,Text,Image,Alert } from 'react-native';
 import axios from 'axios';
 import LikeButton from '../../Home/components/LikeButton';
+import { MY_IP_ADDRESS } from '../../../config/config';
 
 const LikeList = ({ item, customerId, onDelete }) => {
     const { name, price} = item;
@@ -11,7 +12,7 @@ const LikeList = ({ item, customerId, onDelete }) => {
     const removeFromFavorites = async () => {
         try {
         const response = await axios.delete(
-            `http://localhost:8080/customer/${customerId}/favorite`,
+            `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/favorite`,
             { data:{id: item.productId} }
         );
         if (response.status === 200) {
@@ -29,7 +30,7 @@ const LikeList = ({ item, customerId, onDelete }) => {
 
         // 상품을 장바구니에 추가하는 함수
     const addToCart = () => {
-        axios.post('http://localhost:8080/customer/1/cart', {
+        axios.post(`http://${MY_IP_ADDRESS}:8080/customer/1/cart`, {
         breadId: item.productId, // 상품 ID
         quantity: 1, // 선택한 수량
         })

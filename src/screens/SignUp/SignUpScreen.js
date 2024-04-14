@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Dimensions,Alert } from 'react-native';
 import axios from 'axios';
+import { MY_IP_ADDRESS } from '../../config/config';
 
 const { width, height } = Dimensions.get('window');
 const SignUpScreen = ({navigation}) => {
@@ -11,7 +12,7 @@ const SignUpScreen = ({navigation}) => {
   const [quickPassword, setQuickPassword] = useState('');
 
   const handleSignUp = () => {
-    axios.post('http://localhost:8080/customer/signup', {
+    axios.post(`http://${MY_IP_ADDRESS}:8080/customer/signup`, {
       username :username,
       password : password,
       name : name,

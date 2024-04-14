@@ -4,6 +4,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import { View, Text, StyleSheet,TouchableOpacity,ScrollView,Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
+import { MY_IP_ADDRESS } from '../../config/config';
 
 const PurchaseScreen = () => {
     const navigation = useNavigation();
@@ -20,7 +21,7 @@ const PurchaseScreen = () => {
     useEffect(() => {
         if (from === 'cart') {
           // 장바구니 구매 API 호출
-          axios.get(`http://localhost:8080/customer/${customerId}/cart`)
+          axios.get(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart`)
             .then(response => {
               console.log('결제하기 불러오기 성공:', response.data);
               const totalPrice = calculateTotalPrice(response.data);
@@ -32,7 +33,7 @@ const PurchaseScreen = () => {
             });
         } else if (from === 'direct') {
           // 바로 구매 API 호출
-          axios.post(`http://localhost:8080/customer/${customerId}/checkout`, {id : item.breadId, count: quantity})
+          axios.post(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/checkout`, {id : item.breadId, count: quantity})
             .then(response => {
               console.log('바로 구매 성공:', response.data);
               setTotalPrice(item.price * quantity * 0.7);
@@ -64,7 +65,7 @@ const PurchaseScreen = () => {
         console.log('From:', from);
 
         if(from === 'cart'){
-            url = `http://localhost:8080/customer/${customerId}/cart/purchase`;
+            url = `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart/purchase`;
             // 장바구니 항목에서 상품 id와 수량만 추출하여 구매 요청 데이터 생성
                 const safeCartItems = cartItems || [];
                 data = safeCartItems.map(item => ({
@@ -72,7 +73,7 @@ const PurchaseScreen = () => {
                 quantity: item.quantity,
             }));
         }else if(from === 'direct'){
-            url = `http://localhost:8080/customer/${customerId}/purchase`; // Use the correct endpoint if different
+            url = `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/purchase`; // Use the correct endpoint if different
             data = {
                 id: item.breadId, // Confirm this is correctly getting the ID
                 count: quantity,

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {TouchableOpacity, View, StyleSheet, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
+import { MY_IP_ADDRESS } from '../../../config/config';
 
 const LikeButton = ({productId, customerId}) => {
   const [liked, setLiked] = useState(false);
@@ -11,7 +12,7 @@ const LikeButton = ({productId, customerId}) => {
       // 찜 목록에서 삭제
       try {
         const response = await axios.delete(
-          `http://localhost:8080/customer/${customerId}/favorite`,
+          `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/favorite`,
           {data: {id: productId}},
         );
         if (response.status === 200) {
@@ -31,7 +32,7 @@ const LikeButton = ({productId, customerId}) => {
       // 찜 목록에 추가
       try {
         const response = await axios.post(
-          `http://localhost:8080/customer/${customerId}/favorite`,
+          `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/favorite`,
           {id: productId},
         );
         if (response.status === 200) {

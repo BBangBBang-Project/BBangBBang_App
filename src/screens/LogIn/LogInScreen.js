@@ -10,6 +10,7 @@ import {
   Alert
 } from 'react-native';
 import axios from 'axios';
+import { MY_IP_ADDRESS } from '../../config/config';
 
 const {width, height} = Dimensions.get('window');
 const LogInScreen = ({navigation}) => {
@@ -19,7 +20,7 @@ const LogInScreen = ({navigation}) => {
   // 로그인 요청 함수
   const handleLogin = () => {
     axios
-      .post('http://localhost:8080/customer/signIn', {
+      .post(`http://${MY_IP_ADDRESS}:8080/customer/signIn`, {
         username : username,
         password : password,
       })

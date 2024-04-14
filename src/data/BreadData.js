@@ -1,9 +1,10 @@
 // fetchBreadData.js
 import axios from 'axios';
+import { MY_IP_ADDRESS } from '../config/config';
 
 const BreadData = async () => {
   try {
-    const response = await axios.get('http://localhost:8080/customer/products');
+    const response = await axios.get(`http://${MY_IP_ADDRESS}:8080/customer/products`);
     const fetchBreadData = response.data.map(item => ({
       id: item.id,
       name: item.name,

@@ -4,6 +4,7 @@ import OrderList from './components/OrderList';
 import { View, Text, StyleSheet,TouchableOpacity,ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
+import { MY_IP_ADDRESS } from '../../config/config';
 
 const OrderListScreen = () => {
 
@@ -12,7 +13,7 @@ const OrderListScreen = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-            axios.get(`http://localhost:8080/customer/${customerId}/orders`)
+            axios.get(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/orders`)
                 .then(response => {
                     setOrders(response.data); // 응답 데이터로 상태 업데이트
                     console.log("data : ",response.data)

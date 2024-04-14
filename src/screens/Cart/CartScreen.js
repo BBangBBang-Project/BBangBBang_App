@@ -12,6 +12,8 @@ import EmptyCart from './components/EmptyCart';
 import CartList from './components/CartList';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
+import { MY_IP_ADDRESS } from '../../config/config';
+
 const CartScreen = () => {
 
   const navigation = useNavigation();
@@ -30,7 +32,7 @@ const CartScreen = () => {
       try {
         const customerId = '1'; // 예시로 '1'을 사용
         const response = await axios.get(
-          `http://localhost:8080/customer/${customerId}/cart`,
+          `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart`,
         );
         console.log('장바구니 아이템 데이터:', response.data);
         setCartItems(response.data); // 응답 데이터를 상태에 저장
@@ -46,7 +48,7 @@ const CartScreen = () => {
   const updateItemQuantity = async (customerId, cartItemId, newQuantity) => {
     try {
       const response = await axios.patch(
-        `http://localhost:8080/customer/${customerId}/cart/items/${cartItemId}/${newQuantity}`,
+        `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart/items/${cartItemId}/${newQuantity}`,
         {quantity: newQuantity}, // 요청 바디에 quantity를 포함시킴
       );
       console.log('수량 업데이트 성공:', response.data);
@@ -73,7 +75,7 @@ const CartScreen = () => {
     try {
       const customerId = '1';
       // 서버에 장바구니 항목 삭제 요청 보내기
-      await axios.delete(`http://localhost:8080/customer/${customerId}/cart/items/${cartItemId}`);
+      await axios.delete(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart/items/${cartItemId}`);
       
       // 서버에서 항목 삭제가 완료되면 클라이언트 상태 업데이트
       const updatedCartItems = cartItems.filter(item => item.cartItemId !== cartItemId);

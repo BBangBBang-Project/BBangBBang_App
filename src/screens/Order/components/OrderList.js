@@ -1,6 +1,7 @@
 import React, { useEffect} from 'react';
 import { View, TouchableOpacity, StyleSheet,Text,Image, Alert } from 'react-native';
 import axios from 'axios';
+import { MY_IP_ADDRESS } from '../../../config/config';
 
 const OrderList = ({ order }) => {
 
@@ -15,7 +16,7 @@ const OrderList = ({ order }) => {
 
         // 상품을 장바구니에 추가하는 함수
         const addToCart = (productId) => {
-            axios.post('http://localhost:8080/customer/1/cart', {
+            axios.post(`http://${MY_IP_ADDRESS}:8080/customer/1/cart`, {
             breadId: productId, // 상품 ID
             quantity: 1, // 선택한 수량
             })

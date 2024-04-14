@@ -4,6 +4,7 @@ import LikeList from './components/LikeList';
 import { View, Text, StyleSheet,TouchableOpacity,ScrollView,Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
+import { MY_IP_ADDRESS } from '../../config/config';
 
 const LikeScreen = () => {
     const navigation = useNavigation();
@@ -15,7 +16,7 @@ const LikeScreen = () => {
         const fetchLikeList = async () => {
             if (isFocused){
             try {
-                const response = await axios.get(`http://localhost:8080/customer/${customerId}/favorite`);
+                const response = await axios.get(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/favorite`);
                 setLikeList(response.data);
                 
                 console.log("product : ",response.data);

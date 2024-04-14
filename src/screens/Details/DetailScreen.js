@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 import Header from '../../components/Header';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { MY_IP_ADDRESS } from '../../config/config';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -42,7 +43,7 @@ const DetailScreen = () => {
 
     // 상품을 장바구니에 추가하는 함수
 const addToCart = () => {
-  axios.post('http://localhost:8080/customer/1/cart', {
+  axios.post(`http://${MY_IP_ADDRESS}:8080/customer/1/cart`, {
     breadId: item.id, // 상품 ID
     quantity: quantity, // 선택한 수량
   })
@@ -58,7 +59,7 @@ const addToCart = () => {
 const goToPurchaseScreen = (item) => {
   // API 호출을 위한 URL 및 데이터 설정
   const customerId = '1';
-  const url = `http://localhost:8080/customer/${customerId}/checkout`;
+  const url = `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/checkout`;
   const purchaseData = { 
     id: item.id,
     count : quantity,
