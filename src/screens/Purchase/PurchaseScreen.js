@@ -69,17 +69,19 @@ const PurchaseScreen = () => {
             // 장바구니 항목에서 상품 id와 수량만 추출하여 구매 요청 데이터 생성
                 const safeCartItems = cartItems || [];
                 data = safeCartItems.map(item => ({
-                productId: item.id,
+                productId: item.productId,
                 quantity: item.quantity,
+                
             }));
         }else if(from === 'direct'){
             url = `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/purchase`; // Use the correct endpoint if different
             data = {
-                id: item.breadId, // Confirm this is correctly getting the ID
+                id: item.breadId,
                 count: quantity,
             };
         }
-        console.log('URL:', url); // Debug: Check the URL
+        
+        console.log('URL:', url);
     console.log('Data:', data);
     // API 호출하여 구매 처리
     axios.post(url, data)
@@ -114,7 +116,7 @@ const PurchaseScreen = () => {
     <PurchaseList key={index} item={{...item, price: item.price * 0.7}} from="cart"/>
     ))}
     {item && (
-    <PurchaseList key={'direct'} item={{...item, price: item.price * 0.7}} />
+    <PurchaseList key={-1} item={{...item, price: item.price * 0.7}} from="direct"/>
   )}
         </ScrollView>
         <View style = {styles.purchaseItemContainer}>
