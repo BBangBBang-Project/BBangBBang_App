@@ -46,8 +46,6 @@ const PurchaseScreen = () => {
               console.log('q:', quantity)
               console.log('id: ', item.breadId);
             });
-            //구매 시에는 바로 구매한 상품의 데이터를 totalPrice로 설정
-            //setTotalPrice(item.salePrice * quantity * 0.7);
         }
       }, []);
 
@@ -57,21 +55,36 @@ const PurchaseScreen = () => {
     const totalPriceInteger = parseInt(totalPrice);
 
     // PurchaseScreen으로 네비게이션하며 item 데이터 전달
-    const goToPurchaseComplete = () => {
+    const goToPurchaseComplete = (from) => {
     // API 호출을 위한 URL 및 데이터 설정
         const customerId = '1';
-        const url = `http://localhost:8080/customer/${customerId}/cart/purchase`;
-    // 장바구니 항목에서 상품 id와 수량만 추출하여 구매 요청 데이터 생성
-    const safeCartItems = cartItems || [];
-    const purchaseData = safeCartItems.map(item => ({
-        productId: item.id,
-        quantity: item.quantity,
-    }));
+        let url;
+        let data;
+
+        console.log('From:', from);
+
+        if(from === 'cart'){
+            url = `http://localhost:8080/customer/${customerId}/cart/purchase`;
+            // 장바구니 항목에서 상품 id와 수량만 추출하여 구매 요청 데이터 생성
+                const safeCartItems = cartItems || [];
+                data = safeCartItems.map(item => ({
+                productId: item.id,
+                quantity: item.quantity,
+            }));
+        }else if(from === 'direct'){
+            url = `http://localhost:8080/customer/${customerId}/purchase`; // Use the correct endpoint if different
+            data = {
+                id: item.breadId, // Confirm this is correctly getting the ID
+                count: quantity,
+            };
+        }
+        console.log('URL:', url); // Debug: Check the URL
+    console.log('Data:', data);
     // API 호출하여 구매 처리
-    axios.post(url, purchaseData)
+    axios.post(url, data)
         .then(response => {
         // 구매 성공 시, PurchaseScreen으로 네비게이션하며 주문 정보 전달
-        navigation.navigate('Complete', {customerId, item });
+        navigation.navigate('Complete', {customerId, item, from });
         console.log('구매 완료 : ',item);
         })
         .catch(error => {
@@ -97,17 +110,17 @@ const PurchaseScreen = () => {
             </View>
             <ScrollView style={styles.scrollViewStyle}>
             {cartItems && cartItems.map((item, index) => (
-    <PurchaseList key={index} item={{...item, price: item.price * 0.7}} />
+    <PurchaseList key={index} item={{...item, price: item.price * 0.7}} from="cart"/>
     ))}
     {item && (
-    <PurchaseList key={-1} item={{...item, price: item.price * 0.7}} />
+    <PurchaseList key={'direct'} item={{...item, price: item.price * 0.7}} />
   )}
         </ScrollView>
         <View style = {styles.purchaseItemContainer}>
                 <Text style = {styles.purchaseText}>결제 금액</Text>
                 <Text style = {styles.priceText}>{totalPriceInteger}원</Text>
             </View>
-            <TouchableOpacity style={styles.payButton} onPress={goToPurchaseComplete}>
+            <TouchableOpacity style={styles.payButton} onPress={() => goToPurchaseComplete(from)}>
                 <Text style={styles.payButtonText}>결제하기</Text>
             </TouchableOpacity>
         </View>
