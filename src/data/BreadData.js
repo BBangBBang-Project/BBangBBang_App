@@ -5,7 +5,12 @@ import { MY_IP_ADDRESS } from '../config/config';
 const BreadData = async () => {
   try {
     const response = await axios.get(`http://${MY_IP_ADDRESS}:8080/customer/products`);
-    const fetchBreadData = response.data.map(item => ({
+    const products = response.data;
+    
+    // stock이 0보다 큰 제품만 필터링
+    const filteredProducts = products.filter(item => item.stock > 0);
+
+    const fetchBreadData = filteredProducts.map(item => ({
       id: item.id,
       name: item.name,
       imageUrl: require('../assets/images/bread.png'), 
