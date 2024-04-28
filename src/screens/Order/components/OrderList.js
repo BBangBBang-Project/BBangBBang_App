@@ -16,7 +16,7 @@ const OrderList = ({ order }) => {
 
         // 상품을 장바구니에 추가하는 함수
         const addToCart = (productId) => {
-            axios.post(`http://${MY_IP_ADDRESS}:8080/customer/1/cart`, {
+            axios.post(`http://${MY_IP_ADDRESS}:8080/customer/2/cart`, {
             breadId: productId, // 상품 ID
             quantity: 1, // 선택한 수량
             })
@@ -41,8 +41,8 @@ const OrderList = ({ order }) => {
             <Text style = {styles.listName}>{item.productName}</Text>
 
             <View style = {styles.priceContainer}>
-            <Text style={styles.salePrice}>{item.price}원</Text>
-            <Text style={styles.originalPrice}>5,000원</Text>  
+            <Text style={styles.salePrice}>{Math.floor(item.price * 0.7 * item.quantity)}원</Text>
+            <Text style={styles.originalPrice}>{item.price}원</Text>  
             <Text style={styles.quantityText}>{item.quantity}개</Text> 
                 
                 </View>
@@ -91,29 +91,36 @@ const styles = StyleSheet.create({
     listName : {
         fontSize : 20,
         marginLeft : 50,
+        width: 100,
     },
     salePrice : {
         marginTop : 35,
-        marginLeft : -65,
+        marginLeft : -115,
         color: 'rgba(225, 36, 36, 0.66)',
-        fontSize : 17,       
+        fontSize : 17,    
+        width: 70, // 제품명과 맞추기 위한 고정된 너비 추가
+        textAlign: 'right',   
     },  
     originalPrice :{
         marginTop : 0,
         textDecorationLine: 'line-through',
-        marginLeft : -65,
-        fontSize : 12,
+        marginLeft : -115,
+        fontSize : 14,
         color : '#9A9A9A',
+        width: 70, // 고정된 너비 추가
+        textAlign: 'right',
     },
     quantityText : {
-        marginLeft : 30,
+        marginLeft : -25,
         marginTop: -20,
+        width: 30, // 고정된 너비 추가
+        textAlign: 'center', // 텍스트를 가운데 정렬
     },
     addSameMunuButton: {
         borderWidth: 1,
         borderColor: '#FF7E7E',
         marginTop : 75,
-        marginLeft : 0,
+    
         width : 90,
         height : 25,
         alignItems: 'center',

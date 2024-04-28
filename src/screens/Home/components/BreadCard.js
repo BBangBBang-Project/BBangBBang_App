@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import LikeButton from './LikeButton';
 const BreadCard = ({
@@ -10,11 +10,17 @@ const BreadCard = ({
   customerId,
   productId
 }) => {
+  useEffect(() => {
+    console.log("imageUrl:", imageUrl);
+  }, [imageUrl]);  // 이미지 URL이 변경될 때마다 로깅
+
   return (
     <TouchableOpacity onPress={onCardPress} style={styles.cardTouchable}>
       <View style={styles.card}>
         <View style={styles.imageContainer}>
-          <Image source={imageUrl} style={styles.image} />
+          <Image style={styles.image} 
+               source={{uri: imageUrl}}
+        />
         </View>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.originalPrice}>{originalPrice}</Text>

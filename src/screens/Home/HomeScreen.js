@@ -1,28 +1,34 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useCallback} from 'react';
 import { View, ScrollView,StyleSheet, Modal, Text, TouchableOpacity } from 'react-native';
 import BreadCard from './components/BreadCard';
 import Header from '../../components/Header';
 import BreadData from '../../data/BreadData';
+import { useFocusEffect } from '@react-navigation/native';
 
 const HomeScreen = ({ navigation }) => {
 
   const [breadData, setBreadData] = useState([]);
  // const [customerId, setCustomerId] = useState(null);
-  const customerId = '1';
+  const customerId = '2';
 
 // DetailScreen으로 네비게이션하며 item 데이터 전달
   const goToDetailScreen = (item) => {
     navigation.navigate('Detail', { item }); 
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await BreadData(); 
-      setBreadData(data);
-    };
+  const fetchData = async () => {
+    const data = await BreadData();
+    setBreadData(data);
+  };
 
-    fetchData();
-  }, []);
+  // 화면이 포커스 될 때마다 fetchData를 호출
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+      // 여기에는 cleanup 함수를 정의할 필요가 없다면 생략 가능
+      return () => {};
+    }, [])
+  );
 
   // Fetch customer id
 

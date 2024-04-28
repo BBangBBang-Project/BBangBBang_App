@@ -43,7 +43,7 @@ const DetailScreen = () => {
 
     // 상품을 장바구니에 추가하는 함수
 const addToCart = () => {
-  axios.post(`http://${MY_IP_ADDRESS}:8080/customer/1/cart`, {
+  axios.post(`http://${MY_IP_ADDRESS}:8080/customer/2/cart`, {
     breadId: item.id, // 상품 ID
     quantity: quantity, // 선택한 수량
   })
@@ -58,7 +58,7 @@ const addToCart = () => {
 // PurchaseScreen으로 네비게이션하며 item 데이터 전달
 const goToPurchaseScreen = (item) => {
   // API 호출을 위한 URL 및 데이터 설정
-  const customerId = '1';
+  const customerId = '2';
   const url = `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/checkout`;
   const purchaseData = { 
     id: item.id,
@@ -69,7 +69,7 @@ const goToPurchaseScreen = (item) => {
   axios.post(url, purchaseData)
     .then(response => {
       // 구매 성공 시, PurchaseScreen으로 네비게이션하며 주문 정보 전달
-      navigation.navigate('Purchase', { from: 'direct', item:response.data, id: item.id, quantity:quantity,customerId :'1'});
+      navigation.navigate('Purchase', { from: 'direct', item:response.data, id: item.id, quantity:quantity,customerId :'2'});
       console.log('넘겨준 데이터:', response.data);
       console.log('id: ', item.id);
       console.log('quantity:', quantity);

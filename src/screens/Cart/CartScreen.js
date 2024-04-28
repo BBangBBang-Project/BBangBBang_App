@@ -30,7 +30,7 @@ const CartScreen = () => {
     // 장바구니 데이터를 가져오는 함수
     const fetchCartItems = async () => {
       try {
-        const customerId = '1'; // 예시로 '1'을 사용
+        const customerId = '2';
         const response = await axios.get(
           `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart`,
         );
@@ -58,7 +58,7 @@ const CartScreen = () => {
   };
   // 항목의 수량을 업데이트하는 함수
   const handleQuantityChange = (itemId, newQuantity) => {
-    const customerId = '1';
+    const customerId = '2';
     updateItemQuantity(customerId, itemId, newQuantity); // 서버에 수량 업데이트 요청
     const updatedCartItems = cartItems.map(item => {
       if (item.id === itemId) {
@@ -73,7 +73,7 @@ const CartScreen = () => {
 
   const handleDeleteCartItem = async (cartItemId) => {
     try {
-      const customerId = '1';
+      const customerId = '2';
       // 서버에 장바구니 항목 삭제 요청 보내기
       await axios.delete(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart/items/${cartItemId}`);
       
@@ -100,7 +100,7 @@ const CartScreen = () => {
 // PurchaseScreen으로 네비게이션하며 cartItems 데이터 전달
 const goToPurchaseScreen = (cartItems) => {
   // Navigate to PurchaseScreen with cartItems data
-  navigation.navigate('Purchase', { from: 'cart', cartItems, customerId :'1'});
+  navigation.navigate('Purchase', { from: 'cart', cartItems, customerId :'2'});
 };
 
   return (

@@ -2,7 +2,10 @@ import React from 'react';
 import { View, StyleSheet,Text,Image } from 'react-native';
 
 const PurchaseList = ({item}) => {
+
     const purchasePrice = parseInt(item.price);
+    const displayName = item.productName || item.breadName;
+
     return (
         <View style = {[styles.purchaseListContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             
@@ -10,7 +13,7 @@ const PurchaseList = ({item}) => {
             <View style = {styles.listImageContainer}>
                 <Image style = {styles.listImage}source={require('../../../assets/images/bread.png')}/>
             </View>
-            <Text style = {styles.listName}>{item.productName}</Text>
+            <Text style = {styles.listName}>{displayName}</Text>
 
             <View style = {styles.quantityContainer}>
                 <Text style={styles.quantityTitle}>구매수량</Text>

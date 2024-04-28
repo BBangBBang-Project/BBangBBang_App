@@ -16,7 +16,7 @@ const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
   const salePrice = parseInt(item.price * 0.7);
 
   const handleQuantityChange = async(type) => {
-    const customerId = '1'; // 예시로 '1'을 사용
+    const customerId = '2'; 
     const { cartItemId } = item; // 카트 아이템의 ID
     let newQuantity = quantity;
     if (type === 'increase') {

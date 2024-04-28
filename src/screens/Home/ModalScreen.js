@@ -34,7 +34,7 @@ const ModalScreen = ({isVisible, onClose, item}) => {
 
   // 상품을 장바구니에 추가하는 함수
 const addToCart = () => {
-  axios.post('http://localhost:8080/customer/1/cart', {
+  axios.post('http://localhost:8080/customer/2/cart', {
     breadId: item.id, // 상품 ID
     quantity: quantity, // 선택한 수량
   })

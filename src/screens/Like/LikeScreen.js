@@ -10,7 +10,7 @@ const LikeScreen = () => {
     const navigation = useNavigation();
     const isFocused = useIsFocused(); // 페이지 포커스 상태 확인
     const [likeList, setLikeList] = useState([]);
-    const customerId = 1;
+    const customerId = 2;
 
     useEffect(() => {
         const fetchLikeList = async () => {

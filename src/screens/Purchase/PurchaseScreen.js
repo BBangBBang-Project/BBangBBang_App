@@ -58,7 +58,7 @@ const PurchaseScreen = () => {
     // PurchaseScreen으로 네비게이션하며 item 데이터 전달
     const goToPurchaseComplete = (from) => {
     // API 호출을 위한 URL 및 데이터 설정
-        const customerId = '1';
+        const customerId = '2';
         let url;
         let data;
 

@@ -30,7 +30,7 @@ const LikeList = ({ item, customerId, onDelete }) => {
 
         // 상품을 장바구니에 추가하는 함수
     const addToCart = () => {
-        axios.post(`http://${MY_IP_ADDRESS}:8080/customer/1/cart`, {
+        axios.post(`http://${MY_IP_ADDRESS}:8080/customer/2/cart`, {
         breadId: item.productId, // 상품 ID
         quantity: 1, // 선택한 수량
         })
