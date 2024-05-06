@@ -3,7 +3,7 @@ import { View, StyleSheet,Text,Image } from 'react-native';
 
 const PurchaseList = ({item}) => {
 
-    const purchasePrice = parseInt(item.price);
+    const purchasePrice = parseInt(item.price* item.quantity);
     const displayName = item.productName || item.breadName;
 
     return (

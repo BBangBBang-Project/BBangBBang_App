@@ -56,18 +56,32 @@ const CartScreen = () => {
       console.error('수량 업데이트 실패:', error);
     }
   };
-  // 항목의 수량을 업데이트하는 함수
-  const handleQuantityChange = (itemId, newQuantity) => {
-    const customerId = '2';
-    updateItemQuantity(customerId, itemId, newQuantity); // 서버에 수량 업데이트 요청
-    const updatedCartItems = cartItems.map(item => {
-      if (item.id === itemId) {
-        return {...item, quantity: newQuantity};
-      }
-      return item;
-    });
-    setCartItems(updatedCartItems);
-  };
+ // 항목의 수량을 업데이트하는 함수
+const handleQuantityChange = async (cartItemId, newQuantity) => {
+  const customerId = '2';
+  const updatedCartItems = cartItems.map((item) => {
+    if (item.cartItemId === cartItemId) {
+      return {...item, quantity: newQuantity, totalPrice: item.price * newQuantity};
+    }
+    return item;
+  });
+  setCartItems(updatedCartItems); // UI 즉시 업데이트
+
+  // 서버에 수량 업데이트 요청
+  try {
+    const response = await axios.patch(
+      `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart/items/${cartItemId}`,
+      { quantity: newQuantity }
+    );
+    console.log('수량 업데이트 성공:', response.data);
+    // 성공한 경우 여기서 추가적인 상태 업데이트가 필요할 수 있습니다.
+  } catch (error) {
+    console.error('수량 업데이트 실패:', error);
+    // 실패한 경우 UI를 이전 상태로 롤백합니다.
+    setCartItems(cartItems);
+  }
+};
+
 
   
 

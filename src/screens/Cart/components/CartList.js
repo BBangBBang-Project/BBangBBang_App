@@ -12,32 +12,17 @@ const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
     setIsChecked(!isChecked);
   };
 
-  const [quantity, setQuantity] = useState(item.quantity);
-  const salePrice = parseInt(item.price * 0.7);
+  //const [quantity, setQuantity] = useState(item.quantity);
+  const salePrice = parseInt(item.price * item.quantity * 0.7);
+  const originalPrice = parseInt(item.price * item.quantity);
 
-  const handleQuantityChange = async(type) => {
-    const customerId = '2'; 
-    const { cartItemId } = item; // 카트 아이템의 ID
-    let newQuantity = quantity;
-    if (type === 'increase') {
-      newQuantity = quantity + 1;
-    } else if (type === 'decrease' && quantity > 1) {
-      newQuantity = quantity - 1;
+  const handleQuantityChange = (type) => {
+    const newQuantity = type === 'increase' ? item.quantity + 1 : item.quantity - 1;
+    if (type === 'decrease' && item.quantity <= 1) {
+      return; // 수량이 1 이하로 내려가지 않도록 합니다.
     }
-
-    setQuantity(newQuantity);
-    
-    try {
-      const response = await axios.patch(
-          `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart/items/${cartItemId}`,
-          { quantity: newQuantity }
-      );
-      console.log('수량 업데이트 성공:', response.data);
-      
-  } catch (error) {
-      console.error('수량 업데이트 실패:', error);
-  }
-};
+    onQuantityChange(item.cartItemId, newQuantity);
+  };
 
 // 장바구니 물품 삭제 함수 정의
 const handleDelete = () => {
@@ -74,14 +59,14 @@ const handleDelete = () => {
           <TouchableOpacity onPress={() => handleQuantityChange('decrease')}>
             <Icon2 name="minus" style={styles.controlButton}></Icon2>
           </TouchableOpacity>
-          <Text style={styles.quantity}>{quantity}</Text>
+          <Text style={styles.quantity}>{item.quantity}</Text>
           <TouchableOpacity onPress={() => handleQuantityChange('increase')}>
             <Icon2 name="plus" style={styles.controlButton}></Icon2>
           </TouchableOpacity>
         </View>
         <View style={styles.priceContainer}>
           <Text style={styles.salePrice}>{salePrice}</Text>
-          <Text style={styles.originalPrice}>{item.price}</Text>
+          <Text style={styles.originalPrice}>{originalPrice}</Text>
         </View>
       </View>
     </View>
@@ -129,12 +114,14 @@ const styles = StyleSheet.create({
   listName: {
     fontSize: 20,
     marginLeft: 30,
+    width: 100,
   },
   salePrice: {
     marginTop: 35,
     marginLeft: 30,
     color: 'rgba(225, 36, 36, 0.66)',
     fontSize: 17,
+    width: 70,
   },
   originalPrice: {
     marginTop: 0,
@@ -142,9 +129,10 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     fontSize: 12,
     color: '#9A9A9A',
+    width: 70,
   },
   quantityBox: {
-    marginLeft: -80,
+    marginLeft: -120,
     marginTop: 30,
     flexDirection: 'row',
     justifyContent: 'center',
