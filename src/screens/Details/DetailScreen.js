@@ -21,6 +21,7 @@ const DetailScreen = () => {
   const [quantity, setQuantity] = useState(1);
   const {item} = route.params;
   const [totalPrice, setTotalPrice] = useState(item.salePrice);
+  const {imageUrl} = item;
 
   useEffect(() => {
     // 수량이 변경될 때마다 총 가격을 업데이트
@@ -88,7 +89,7 @@ const goToPurchaseScreen = (item) => {
           <Text style={styles.breadName}>{item.name}</Text>
           <Image
             style={styles.breadImage}
-            source={require('../../assets/images/bread.png')}
+            source={{ uri: imageUrl }}
           />
           <Text style={styles.infoTitle}>
             특별한 재료를 넣어서 아주 맛있는 식빵
