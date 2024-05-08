@@ -1,53 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {TouchableOpacity, View, StyleSheet, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import axios from 'axios';
-import { MY_IP_ADDRESS } from '../../../config/config';
+import { useLikes } from '../../../contexts/LikesContext';
 
-const LikeButton = ({productId, customerId}) => {
-  const [liked, setLiked] = useState(false);
+const LikeButton = ({productId, customerId, liked}) => {
+  const { addLike, removeLike } = useLikes();
 
   const handlePress = async () => {
     if (liked) {
-      // 찜 목록에서 삭제
-      try {
-        const response = await axios.delete(
-          `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/favorite`,
-          {data: {id: productId}},
-        );
-        if (response.status === 200) {
-          setLiked(false);
-          Alert.alert('찜 목록에서 삭제되었습니다!');
-          console.log('liked : ', liked);
-          console.log('productId : ', productId);
-          console.log('customerId : ', customerId);
-        }
-      } catch (error) {
-        console.error(error);
-        console.log('liked : ', liked);
-        console.log('productId : ', productId);
-        console.log('customerId : ', customerId);
-      }
+      await removeLike(productId, customerId);
     } else {
-      // 찜 목록에 추가
-      try {
-        const response = await axios.post(
-          `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/favorite`,
-          {id: productId},
-        );
-        if (response.status === 200) {
-          setLiked(true);
-          Alert.alert('찜 목록에 추가되었습니다!');
-          console.log('liked : ', liked);
-          console.log('productId : ', productId);
-          console.log('customerId : ', customerId);
-        }
-      } catch (error) {
-        console.error(error);
-        console.log('liked : ', liked);
-        console.log('productId : ', productId);
-        console.log('customerId : ', customerId);
-      }
+      await addLike({ id: productId, customerId });
     }
   };
 

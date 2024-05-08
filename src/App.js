@@ -6,6 +6,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MainStack from './navigations/MainStack';
 import AuthStack from './navigations/AuthStack';
+import { LikesProvider } from './contexts/LikesContext';
 
 const Stack = createStackNavigator();
 
@@ -28,9 +29,11 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
+      <LikesProvider>
       <NavigationContainer>
         <MainStack />
       </NavigationContainer>
+      </LikesProvider>
     </SafeAreaProvider>
   );
 };

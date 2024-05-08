@@ -1,32 +1,20 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet,Text,Image,Alert } from 'react-native';
 import axios from 'axios';
-import LikeButton from '../../Home/components/LikeButton';
+import { useLikes } from '../../../contexts/LikesContext';
 import { MY_IP_ADDRESS } from '../../../config/config';
 
-const LikeList = ({ item, customerId, onDelete }) => {
-    const { name, price} = item;
+const LikeList = ({ item, customerId }) => {
+    const { name, price, imageUrl} = item;
     const salePrice = parseInt(price * 0.7);
+    const { removeLike } = useLikes();
 
   // 상품을 찜 목록에서 삭제하는 함수
-    const removeFromFavorites = async () => {
-        try {
-        const response = await axios.delete(
-            `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/favorite`,
-            { data:{id: item.productId} }
-        );
-        if (response.status === 200) {
-            onDelete(item.productId);
-            Alert.alert('찜 목록에서 삭제되었습니다!');
-        }
-        } catch (error) {
-        console.error('찜 목록 삭제 에러:', error);
-        console.log("name : ", name)
-        console.log("id  : ", item.productId)
-        console.log('liked : ', setLiked);
-        
-        }
-    };
+  const removeFromFavorites = async () => {
+    removeLike(item.productId, customerId);
+    console.log("name : ", name)
+    console.log("id : ", item.productId )
+};
 
         // 상품을 장바구니에 추가하는 함수
     const addToCart = () => {
@@ -36,6 +24,7 @@ const LikeList = ({ item, customerId, onDelete }) => {
         })
         .then(response => {
         console.log('장바구니에 추가됨:', response.data); // 모달 창 닫기
+        Alert.alert("장바구니에 담겼습니다")
         })
         .catch(error => {
             console.error('장바구니에 상품 추가 에러:', error);
@@ -47,7 +36,7 @@ const LikeList = ({ item, customerId, onDelete }) => {
             <View style = {styles.rowLikeContainer}>
 
             <View style = {styles.listImageContainer}>
-                <Image style = {styles.listImage}source={require('../../../assets/images/bread.png')}/>
+                <Image style = {styles.listImage} source={{ uri: imageUrl }} />
             </View>
 
             <Text style = {styles.listName}>{name}</Text>

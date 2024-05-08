@@ -1,39 +1,23 @@
-import React,{ useState,useEffect } from 'react';
+import React,{useEffect, useCallback} from 'react';
 import { useNavigation,useIsFocused } from '@react-navigation/native';
 import LikeList from './components/LikeList';
-import { View, Text, StyleSheet,TouchableOpacity,ScrollView,Alert } from 'react-native';
+import { View, Text, StyleSheet,TouchableOpacity,ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import axios from 'axios';
-import { MY_IP_ADDRESS } from '../../config/config';
+import { useLikes } from '../../contexts/LikesContext';
 
 const LikeScreen = () => {
     const navigation = useNavigation();
     const isFocused = useIsFocused(); // 페이지 포커스 상태 확인
-    const [likeList, setLikeList] = useState([]);
+    const { likes, fetchLikes } = useLikes(); // LikesContext에서 찜 목록 데이터와 데이터 로딩 함수를 가져옴
     const customerId = 2;
 
-    useEffect(() => {
-        const fetchLikeList = async () => {
-            if (isFocused){
-            try {
-                const response = await axios.get(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/favorite`);
-                setLikeList(response.data);
-                
-                console.log("product : ",response.data);
-            } catch (error) {
-                console.error('Error fetching like list:', error);
-                console.log("product : ",response.data);
-            }
-        }
-        };
-        fetchLikeList();
-        }, [isFocused]);
 
-        // 삭제 콜백 함수
-    const removeFromFavorites = productId => {
-        setLikeList(prevList => prevList.filter(likedItem => likedItem.productId !== productId));
-        Alert.alert('찜 목록에서 삭제되었습니다!');
-    };
+    useEffect(() => {
+        if (isFocused) {
+            fetchLikes(); // 화면 포커스 시 찜 목록 갱신
+            console.log(likes);
+        }
+    }, [isFocused, likes]);
 
     return (
         <View style = {styles.likeScreenContainer}> 
@@ -44,9 +28,9 @@ const LikeScreen = () => {
             <Text style={styles.titleText}>찜한 상품 </Text>
             </View>
             <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-            {likeList.map((item) => (
-          <LikeList key={item.favorite_id} item={item} onDelete={removeFromFavorites} customerId={customerId}/>
-        ))}
+                {likes.map((item) => (
+                    <LikeList key={item.favorite_id} item={item} customerId={customerId}/>
+                ))}
         </ScrollView>
         </View>
         

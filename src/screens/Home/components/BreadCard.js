@@ -8,7 +8,8 @@ const BreadCard = ({
   salePrice,
   onCardPress,
   customerId,
-  productId
+  productId,
+  liked
 }) => {
   useEffect(() => {
     console.log("imageUrl:", imageUrl);
@@ -26,7 +27,7 @@ const BreadCard = ({
         <Text style={styles.originalPrice}>{originalPrice}</Text>
         <Text style={styles.salePrice}>{salePrice}</Text>
         <View style={styles.likeButtonContainer}>
-          <LikeButton productId={productId} customerId={customerId} />
+          <LikeButton productId={productId} customerId={customerId} liked={liked}/>
         </View>
       </View>
     </TouchableOpacity>
