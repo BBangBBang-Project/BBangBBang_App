@@ -43,19 +43,7 @@ const CartScreen = () => {
 
     fetchCartItems(); // 함수 호출
   }, []);
-  
-  // 항목의 수량을 서버에 업데이트하는 함수
-  const updateItemQuantity = async (customerId, cartItemId, newQuantity) => {
-    try {
-      const response = await axios.patch(
-        `http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart/items/${cartItemId}/${newQuantity}`,
-        {quantity: newQuantity}, // 요청 바디에 quantity를 포함시킴
-      );
-      console.log('수량 업데이트 성공:', response.data);
-    } catch (error) {
-      console.error('수량 업데이트 실패:', error);
-    }
-  };
+
  // 항목의 수량을 업데이트하는 함수
 const handleQuantityChange = async (cartItemId, newQuantity) => {
   const customerId = '2';
@@ -81,9 +69,6 @@ const handleQuantityChange = async (cartItemId, newQuantity) => {
     setCartItems(cartItems);
   }
 };
-
-
-  
 
   const handleDeleteCartItem = async (cartItemId) => {
     try {

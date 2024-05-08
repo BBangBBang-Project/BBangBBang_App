@@ -3,8 +3,6 @@ import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
 import Icon3 from 'react-native-vector-icons/AntDesign';
-import axios from 'axios';
-import { MY_IP_ADDRESS } from '../../../config/config';
 
 const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -12,7 +10,7 @@ const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
     setIsChecked(!isChecked);
   };
 
-  //const [quantity, setQuantity] = useState(item.quantity);
+  const {imageUrl} = item;
   const salePrice = parseInt(item.price * item.quantity * 0.7);
   const originalPrice = parseInt(item.price * item.quantity);
 
@@ -51,7 +49,7 @@ const handleDelete = () => {
         <View style={styles.listImageContainer}>
           <Image
             style={styles.listImage}
-            source={require('../../../assets/images/bread.png')}
+            source={{ uri: imageUrl }}
           />
         </View>
         <Text style={styles.listName}>{item.productName}</Text>
