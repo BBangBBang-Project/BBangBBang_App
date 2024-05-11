@@ -6,6 +6,7 @@ import { MY_IP_ADDRESS } from '../../../config/config';
 
 const LikeList = ({ item, customerId }) => {
     const { name, price, imageUrl} = item;
+    const networkImageUrl = imageUrl.replace('localhost', MY_IP_ADDRESS);
     const salePrice = parseInt(price * 0.7);
     const { removeLike } = useLikes();
 
@@ -36,7 +37,7 @@ const LikeList = ({ item, customerId }) => {
             <View style = {styles.rowLikeContainer}>
 
             <View style = {styles.listImageContainer}>
-                <Image style = {styles.listImage} source={{ uri: imageUrl }} />
+                <Image style = {styles.listImage} source={{ uri: networkImageUrl }} />
             </View>
 
             <Text style = {styles.listName}>{name}</Text>
