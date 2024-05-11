@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, StyleSheet,Text,Image } from 'react-native';
+import { MY_IP_ADDRESS } from '../../../config/config';
 
 const PurchaseList = ({item}) => {
 
+    const {imageUrl} = item;
+    const networkImageUrl = imageUrl.replace('localhost', MY_IP_ADDRESS);
     const purchasePrice = parseInt(item.price* item.quantity);
     const displayName = item.productName || item.breadName;
 
@@ -11,7 +14,7 @@ const PurchaseList = ({item}) => {
             
             <View style = {styles.rowPurchaseContainer}>
             <View style = {styles.listImageContainer}>
-                <Image style = {styles.listImage}source={require('../../../assets/images/bread.png')}/>
+                <Image style = {styles.listImage} source={{ uri: networkImageUrl }}/>
             </View>
             <Text style = {styles.listName}>{displayName}</Text>
 

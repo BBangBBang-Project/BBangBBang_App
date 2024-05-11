@@ -9,8 +9,12 @@ import { MY_IP_ADDRESS } from '../../config/config';
 const PurchaseScreen = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { from, item, quantity, customerId,cartItems } = route.params;
+    const { from, item, quantity, customerId } = route.params;
     const [totalPrice, setTotalPrice] = useState(0);
+    const [directItem, setDirectItem] = useState(null);
+    const [cartItems, setCartItems] = useState([]);
+
+
     
     const calculateTotalPrice = (data) => {
         return data.reduce((acc, item) => {
@@ -20,35 +24,41 @@ const PurchaseScreen = () => {
     
     useEffect(() => {
         if (from === 'cart') {
-          // 장바구니 구매 API 호출
-          axios.get(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart`)
-            .then(response => {
-              console.log('결제하기 불러오기 성공:', response.data);
-              const totalPrice = calculateTotalPrice(response.data);
-
-                setTotalPrice(totalPrice);
-            })
-            .catch(error => {
-              console.error('결제하기 불러오기 실패:', error);
-            });
+            axios.get(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart`)
+                .then(response => {
+                    console.log('결제하기 불러오기 성공:', response.data);
+                    const totalPrice = calculateTotalPrice(response.data);
+    
+                    
+                    const updatedCartItems = response.data.map(item => ({
+                        ...item,
+                        imageUrl: item.imageUrl, 
+                        price: item.price * 0.7 
+                    }));
+    
+                    setCartItems(updatedCartItems);
+                    setTotalPrice(totalPrice);
+                })
+                .catch(error => {
+                    console.error('결제하기 불러오기 실패:', error);
+                });
         } else if (from === 'direct') {
-          // 바로 구매 API 호출
-          axios.post(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/checkout`, {id : item.breadId, count: quantity})
+            axios.post(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/checkout`, { id: item.breadId, count: quantity })
             .then(response => {
-              console.log('바로 구매 성공:', response.data);
-              setTotalPrice(item.price * quantity * 0.7);
-              console.log('id: ', item.breadId);
-              console.log('q:', quantity)
+                console.log('바로 구매 성공:', response.data);
+                setTotalPrice(item.price * quantity * 0.7);
+                setDirectItem({
+                    ...item,
+                    imageUrl: response.data.breadImage, 
+                    price: item.price * 0.7, 
+                    quantity: quantity 
+                });
             })
             .catch(error => {
-              console.error('바로 구매 실패:', error);
-              console.log('item:', item)
-              
-              console.log('q:', quantity)
-              console.log('id: ', item.breadId);
-            });
-        }
-      }, []);
+                console.error('바로 구매 실패:', error);
+                });
+            }
+        },  [from, customerId, item, quantity]);
 
       // 총 가격 상태 추가
 
@@ -113,10 +123,10 @@ const PurchaseScreen = () => {
             </View>
             <ScrollView style={styles.scrollViewStyle}>
             {cartItems && cartItems.map((item, index) => (
-    <PurchaseList key={index} item={{...item, price: item.price * 0.7}} from="cart"/>
+    <PurchaseList key={index} item={item} from="cart"/>
     ))}
-    {item && (
-    <PurchaseList key={-1} item={{...item, price: item.price * 0.7}} from="direct"/>
+    {directItem && (
+    <PurchaseList key='direct' item={directItem} from="direct"/>
   )}
         </ScrollView>
         <View style = {styles.purchaseItemContainer}>
