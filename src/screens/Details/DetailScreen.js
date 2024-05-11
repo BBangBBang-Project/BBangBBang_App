@@ -23,12 +23,29 @@ const DetailScreen = () => {
   const [totalPrice, setTotalPrice] = useState(item.salePrice);
   const {imageUrl} = item;
 
+  // 날짜 계산
+  const getYesterdayDate = () => {
+    const today = new Date();
+    const yesterday = new Date(today.setDate(today.getDate() - 1));
+    return yesterday.toISOString().split('T')[0].replace(/-/g, '.');
+  };
+
+  const [bakedDate, setBakedDate] = useState(getYesterdayDate());
+
   useEffect(() => {
     // 수량이 변경될 때마다 총 가격을 업데이트
     setTotalPrice(
       quantity * parseFloat(item.salePrice.replace(/[^0-9-.]/g, '')),
     );
   }, [quantity, item.salePrice]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setBakedDate(getYesterdayDate());
+    }, 86400000); // 매일 자정마다 날짜 업데이트
+
+    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 인터벌 정리
+  }, []);
 
   const handleQuantityChange = type => {
     if (type === 'increase') {
@@ -38,9 +55,9 @@ const DetailScreen = () => {
     }
   };
 
-  const navigateToNutrition = item => {
-    navigation.navigate('Nutrition', {item});
-  };
+  // const navigateToNutrition = item => {
+  //   navigation.navigate('Nutrition', {item});
+  // };
 
     // 상품을 장바구니에 추가하는 함수
 const addToCart = () => {
@@ -84,7 +101,7 @@ const goToPurchaseScreen = (item) => {
   return (
     <View style={styles.detailContainer}>
       <Header />
-      <TouchableOpacity onPress={navigateToNutrition}>
+      {/* <TouchableOpacity onPress={navigateToNutrition}> */}
         <View style={styles.breadInfo}>
           <Text style={styles.breadName}>{item.name}</Text>
           <Image
@@ -92,15 +109,15 @@ const goToPurchaseScreen = (item) => {
             source={{ uri: imageUrl }}
           />
           <Text style={styles.infoTitle}>
-            특별한 재료를 넣어서 아주 맛있는 식빵
+            특별한 재료를 넣어서 아주 맛있는 빵입니다
           </Text>
           <Text style={styles.infoText}>
-            아주 쫄깃쫄깃해서 많이 팔리는 베스트 셀러
+            많이 팔리는 베스트 셀러 Number 1
           </Text>
         </View>
-      </TouchableOpacity>
+      {/* </TouchableOpacity> */}
       <View style={styles.bakedDateContainer}>
-        <Text style={styles.bakedDateInfo}>2024.03.18 제조</Text>
+        <Text style={styles.bakedDateInfo}>{bakedDate} 제조</Text>
       </View>
       <View style={styles.modalView}>
         <Text style={styles.itemName}>{item.name}</Text>
