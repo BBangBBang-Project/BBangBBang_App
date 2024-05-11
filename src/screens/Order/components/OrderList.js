@@ -33,25 +33,24 @@ const OrderList = ({ order }) => {
             
         <View style = {[styles.orderListContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
                 <Text style={styles.orderDate}>{formatDate(order.orderDate)}</Text>
-            {order.orderItems.map((item, index) => (
-            <View key={index} style = {styles.rowOrderContainer}>
-            <View style = {styles.listImageContainer}>
-                <Image style = {styles.listImage}source={require('../../../assets/images/bread.png')}/>
-            </View>
-            <Text style = {styles.listName}>{item.productName}</Text>
-
-            <View style = {styles.priceContainer}>
-            <Text style={styles.salePrice}>{Math.floor(item.price * 0.7 * item.quantity)}원</Text>
-            <Text style={styles.originalPrice}>{item.price}원</Text>  
-            <Text style={styles.quantityText}>{item.quantity}개</Text> 
-                
-                </View>
-
-    <TouchableOpacity style={styles.addSameMunuButton} onPress={() => addToCart(item.productId)}>
-        <Text style={styles.addSameMunuText}>같은 메뉴 담기</Text>
-    </TouchableOpacity>
-        </View>
-        ))}
+            {order.orderItems.map((item, index) => {
+                const networkImageUrl = item.imageUrl.replace('localhost', MY_IP_ADDRESS);
+                return (
+                    <View key={index} style = {styles.rowOrderContainer}>
+                        <View style = {styles.listImageContainer}>
+                            <Image style = {styles.listImage} source={{ uri: networkImageUrl }}/>
+                        </View>
+                        <Text style = {styles.listName}>{item.productName}</Text>
+                        <View style = {styles.priceContainer}>
+                            <Text style={styles.salePrice}>{Math.floor(item.price * 0.7 * item.quantity)}원</Text>
+                            <Text style={styles.originalPrice}>{item.price}원</Text>  
+                            <Text style={styles.quantityText}>{item.quantity}개</Text> 
+                        </View>
+                        <TouchableOpacity style={styles.addSameMunuButton} onPress={() => addToCart(item.productId)}>
+                            <Text style={styles.addSameMunuText}>같은 메뉴 담기</Text>
+                        </TouchableOpacity>
+                    </View>);
+            })}
         </View>
     );
 };
