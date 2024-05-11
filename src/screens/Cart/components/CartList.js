@@ -3,6 +3,7 @@ import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
 import Icon3 from 'react-native-vector-icons/AntDesign';
+import { MY_IP_ADDRESS } from '../../../config/config';
 
 const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -11,6 +12,7 @@ const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
   };
 
   const {imageUrl} = item;
+  const networkImageUrl = imageUrl.replace('localhost', MY_IP_ADDRESS);
   const salePrice = parseInt(item.price * item.quantity * 0.7);
   const originalPrice = parseInt(item.price * item.quantity);
 
@@ -49,7 +51,7 @@ const handleDelete = () => {
         <View style={styles.listImageContainer}>
           <Image
             style={styles.listImage}
-            source={{ uri: imageUrl }}
+            source={{ uri: networkImageUrl }}
           />
         </View>
         <Text style={styles.listName}>{item.productName}</Text>
