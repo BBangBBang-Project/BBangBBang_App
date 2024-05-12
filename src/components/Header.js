@@ -15,7 +15,9 @@ const Header = () => {
         />
         <Text style={styles.logotext}>BBANGBBANG</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Map')}>
       <Icon style={styles.search} name="search" size={30} color="black"></Icon>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
       <Icon2
         style={styles.icon}

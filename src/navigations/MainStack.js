@@ -11,6 +11,7 @@ import MyPage from '../screens/MyPage/MyPage';
 import OrderListScreen from '../screens/Order/OrderListScreen';
 import PurchaseComplete from '../screens/Purchase/PurchaseComplete';
 import PurchaseScreen from '../screens/Purchase/PurchaseScreen';
+import MapScreen from '../screens/Map/MapScreen';
 const Stack = createStackNavigator();
 
 const MainStack = () => {
@@ -69,6 +70,11 @@ const MainStack = () => {
       <Stack.Screen
         name="Purchase"
         component={PurchaseScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Map"
+        component={MapScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
