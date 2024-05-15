@@ -13,12 +13,19 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		204CA3BF2BF11CEC003BE397 /* MapInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 204CA3BE2BF11CEC003BE397 /* MapInfo.plist */; };
+		20EB73722BF48B5200E00CE8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB73712BF48B5200E00CE8 /* File.swift */; };
 		7699B88040F8A987B510C191 /* libPods-bbangbbangApp-bbangbbangAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-bbangbbangApp-bbangbbangAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		92D6B7C14A1243B8AEA5B843 /* Syncopate.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B77B6E135B541E9A6B1BED3 /* Syncopate.ttf */; };
 		C9D2D12BE39A4F5A91B9A470 /* ZenMaruGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC08609F4BA54793835F22DA /* ZenMaruGothic-Regular.ttf */; };
 		E4201633684049BAB8EAD4C0 /* ZenMaruGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706BC74B0E164C4C9B5DD133 /* ZenMaruGothic-Bold.ttf */; };
 		FD8E2C71A1C9444CAAEA831B /* ZenMaruGothic-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BFB6AB0F4164DC091636B64 /* ZenMaruGothic-Medium.ttf */; };
+		5F3446DD09FC4C029D350AB9 /* Strait.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86BD28D2FBDD49C998FCA812 /* Strait.ttf */; };
+		C02E2516BC26435EBBB8C346 /* bread.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAF88D4EF5E4B18BF6DFED5 /* bread.png */; };
+		FF4D52DBBA5A4546AB0F78F7 /* colorBread.png in Resources */ = {isa = PBXBuildFile; fileRef = 263D7009E4F8447E8932D103 /* colorBread.png */; };
+		9D27E73AD7424958B20540B4 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 03B718E2757941D89DE29BFB /* logo.png */; };
+		E9A26349F2D74B3F872F096C /* whiteBread.png in Resources */ = {isa = PBXBuildFile; fileRef = CC09E0FB8DDE4CF2A9C2D94E /* whiteBread.png */; };
+		B0BD6475020B46C0ABBF6F05 /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 012D81E8781341B58642BA7A /* marker.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +50,8 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = bbangbbangApp/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-bbangbbangApp-bbangbbangAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bbangbbangApp-bbangbbangAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		204CA3BE2BF11CEC003BE397 /* MapInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = MapInfo.plist; path = ../MapInfo.plist; sourceTree = "<group>"; };
+		20EB73702BF48B5100E00CE8 /* bbangbbangApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bbangbbangApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		20EB73712BF48B5200E00CE8 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = File.swift; path = ../File.swift; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-bbangbbangApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bbangbbangApp.debug.xcconfig"; path = "Target Support Files/Pods-bbangbbangApp/Pods-bbangbbangApp.debug.xcconfig"; sourceTree = "<group>"; };
 		3BFB6AB0F4164DC091636B64 /* ZenMaruGothic-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ZenMaruGothic-Medium.ttf"; path = "../src/assets/fonts/ZenMaruGothic-Medium.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-bbangbbangApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bbangbbangApp.release.xcconfig"; path = "Target Support Files/Pods-bbangbbangApp/Pods-bbangbbangApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -54,6 +63,12 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-bbangbbangApp-bbangbbangAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bbangbbangApp-bbangbbangAppTests.release.xcconfig"; path = "Target Support Files/Pods-bbangbbangApp-bbangbbangAppTests/Pods-bbangbbangApp-bbangbbangAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		AC08609F4BA54793835F22DA /* ZenMaruGothic-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ZenMaruGothic-Regular.ttf"; path = "../src/assets/fonts/ZenMaruGothic-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		86BD28D2FBDD49C998FCA812 /* Strait.ttf */ = {isa = PBXFileReference; name = "Strait.ttf"; path = "../src/assets/fonts/Strait.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AEAF88D4EF5E4B18BF6DFED5 /* bread.png */ = {isa = PBXFileReference; name = "bread.png"; path = "../src/assets/images/bread.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		263D7009E4F8447E8932D103 /* colorBread.png */ = {isa = PBXFileReference; name = "colorBread.png"; path = "../src/assets/images/colorBread.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		03B718E2757941D89DE29BFB /* logo.png */ = {isa = PBXFileReference; name = "logo.png"; path = "../src/assets/images/logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CC09E0FB8DDE4CF2A9C2D94E /* whiteBread.png */ = {isa = PBXFileReference; name = "whiteBread.png"; path = "../src/assets/images/whiteBread.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		012D81E8781341B58642BA7A /* marker.png */ = {isa = PBXFileReference; name = "marker.png"; path = "../src/assets/images/marker.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +114,12 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				204CA3BE2BF11CEC003BE397 /* MapInfo.plist */,
+				20EB73712BF48B5200E00CE8 /* File.swift */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				20EB73702BF48B5100E00CE8 /* bbangbbangApp-Bridging-Header.h */,
 			);
 			name = bbangbbangApp;
 			sourceTree = "<group>";
@@ -167,6 +184,12 @@
 				3BFB6AB0F4164DC091636B64 /* ZenMaruGothic-Medium.ttf */,
 				AC08609F4BA54793835F22DA /* ZenMaruGothic-Regular.ttf */,
 				6B77B6E135B541E9A6B1BED3 /* Syncopate.ttf */,
+				86BD28D2FBDD49C998FCA812 /* Strait.ttf */,
+				AEAF88D4EF5E4B18BF6DFED5 /* bread.png */,
+				263D7009E4F8447E8932D103 /* colorBread.png */,
+				03B718E2757941D89DE29BFB /* logo.png */,
+				CC09E0FB8DDE4CF2A9C2D94E /* whiteBread.png */,
+				012D81E8781341B58642BA7A /* marker.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -229,7 +252,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1530;
 					};
 				};
 			};
@@ -271,6 +294,12 @@
 				FD8E2C71A1C9444CAAEA831B /* ZenMaruGothic-Medium.ttf in Resources */,
 				C9D2D12BE39A4F5A91B9A470 /* ZenMaruGothic-Regular.ttf in Resources */,
 				92D6B7C14A1243B8AEA5B843 /* Syncopate.ttf in Resources */,
+				5F3446DD09FC4C029D350AB9 /* Strait.ttf in Resources */,
+				C02E2516BC26435EBBB8C346 /* bread.png in Resources */,
+				FF4D52DBBA5A4546AB0F78F7 /* colorBread.png in Resources */,
+				9D27E73AD7424958B20540B4 /* logo.png in Resources */,
+				E9A26349F2D74B3F872F096C /* whiteBread.png in Resources */,
+				B0BD6475020B46C0ABBF6F05 /* marker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				20EB73722BF48B5200E00CE8 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-bbangbbangApp-bbangbbangAppTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -467,6 +498,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-bbangbbangApp-bbangbbangAppTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = bbangbbangAppTests/Info.plist;
@@ -567,6 +599,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = bbangbbangApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "bbangbbangApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -652,6 +685,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = bbangbbangApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "bbangbbangApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -726,10 +760,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -797,10 +828,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

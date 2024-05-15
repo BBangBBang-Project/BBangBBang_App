@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/Strait.ttf",
+      "sha1": "44f6e0cac0ea0e24d846bf2a1e70bf09a6213663"
+    },
+    {
       "path": "src/assets/fonts/Syncopate.ttf",
       "sha1": "2db3b9c435e7e7f52203e3d636d3ddb90e4e0878"
     },
@@ -16,6 +20,26 @@
     {
       "path": "src/assets/fonts/ZenMaruGothic-Regular.ttf",
       "sha1": "efcf59064abab0d5d8fa964e7f547a45f1860229"
+    },
+    {
+      "path": "src/assets/images/bread.png",
+      "sha1": "f85b3a4aba11dc4fe153d5d5ceb25ff41d7a4686"
+    },
+    {
+      "path": "src/assets/images/colorBread.png",
+      "sha1": "de18d8517c7ac4e4998843961f7dac8a5febb94f"
+    },
+    {
+      "path": "src/assets/images/logo.png",
+      "sha1": "b914560f297282b87eaa8d02777e0bc60b98f4fe"
+    },
+    {
+      "path": "src/assets/images/marker.png",
+      "sha1": "7bcad4a28919b0cf2e9e9cd1d2e3c6c672665615"
+    },
+    {
+      "path": "src/assets/images/whiteBread.png",
+      "sha1": "66772d080214f9fd648b7623194da1c2b0dbb95f"
     }
   ]
 }
