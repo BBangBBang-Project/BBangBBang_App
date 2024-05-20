@@ -7,6 +7,7 @@ import {
   Text,
   Image,
   Dimensions,
+  Alert,
 } from 'react-native';
 import axios from 'axios';
 import Header from '../../components/Header';
@@ -66,7 +67,21 @@ const addToCart = () => {
     quantity: quantity, // 선택한 수량
   })
   .then(response => {
-    console.log('장바구니에 추가됨:', response.data); // 모달 창 닫기
+    console.log('장바구니에 추가됨:', response.data); 
+    Alert.alert(
+      '장바구니에 추가되었습니다!','',
+      [
+        {
+          text: '장바구니로 이동',
+          onPress: () => navigation.navigate('Cart'),
+        },
+        {
+          text: '취소',
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false }
+    );
   })
   .catch(error => {
     console.error('장바구니에 상품 추가 에러:', error);
