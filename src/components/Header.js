@@ -3,10 +3,12 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
+import { SafeAreaView } from 'react-native-safe-area-context';
 const Header = () => {
     const navigation = useNavigation();
     
   return (
+    <SafeAreaView style={styles.safeArea}>
     <View style={styles.container}>
       <TouchableOpacity style={styles.logoContainer} onPress={() => navigation.navigate('BottomTab')}>
         <Image
@@ -26,10 +28,14 @@ const Header = () => {
         color="black"></Icon2>
         </TouchableOpacity>
     </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: '#ffffff',
+  },
   container: {
     backgroundColor: '#ffffff',
     flexDirection: 'row',
