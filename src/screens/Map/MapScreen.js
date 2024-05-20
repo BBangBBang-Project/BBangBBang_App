@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Platform, PermissionsAndroid, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Platform, PermissionsAndroid, TouchableOpacity, Alert } from "react-native";
 import Geolocation from "react-native-geolocation-service";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -55,6 +55,20 @@ function MapScreen() {
     getLocation();
   }, []);
 
+  const handleMarkerPress = (title) => {
+    Alert.alert(
+      `${title}을 클릭했습니다.`,
+      `${title}으로 변경됩니다.`,
+      [
+        {
+          text: "OK",
+          onPress: () => navigation.goBack(),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   if (!location) {
     return (
       <View style={styles.container}>
@@ -79,18 +93,21 @@ function MapScreen() {
           title={"한성대입구역"}
           description={"한성대입구역"}
           icon={require('../../assets/images/marker.png')}
+          onPress={() => handleMarkerPress("한성대입구역")}
         />
         <Marker
           coordinate={{ latitude: 37.592694767073134, longitude: 127.01650323455772 }}
           title={"성신여대입구역"}
           description={"성신여대입구역"}
           icon={require('../../assets/images/marker.png')}
+          onPress={() => handleMarkerPress("성신여대입구역")}
         />
         <Marker
           coordinate={{ latitude: 37.58215429037538, longitude: 127.00189633072232 }}
           title={"혜화역"}
           description={"혜화역"}
           icon={require('../../assets/images/marker.png')}
+          onPress={() => handleMarkerPress("혜화역")}
         />
       </MapView>
       <TouchableOpacity style={styles.button} onPress={getLocation}>
