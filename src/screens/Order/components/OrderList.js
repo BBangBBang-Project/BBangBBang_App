@@ -42,7 +42,7 @@ const OrderList = ({ order }) => {
                         </View>
                         <Text style = {styles.listName}>{item.productName}</Text>
                         <View style = {styles.priceContainer}>
-                            <Text style={styles.salePrice}>{Math.floor(item.price * 0.7 * item.quantity)}원</Text>
+                            <Text style={styles.salePrice}>{Math.floor(item.price * 0.7)}원</Text>
                             <Text style={styles.originalPrice}>{item.price}원</Text>  
                             <Text style={styles.quantityText}>{item.quantity}개</Text> 
                         </View>

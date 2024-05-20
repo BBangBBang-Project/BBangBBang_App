@@ -15,14 +15,15 @@ const OrderListScreen = () => {
     useEffect(() => {
             axios.get(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/orders`)
                 .then(response => {
-                    setOrders(response.data); // 응답 데이터로 상태 업데이트
-                    console.log("data : ",response.data)
-                    orders.forEach((order, orderIndex) => {
-                        console.log(`Order ${orderIndex + 1}의 orderItems:`);
+                    const sortedOrders = response.data.sort((a, b) => b.orderId - a.orderId); // orderId를 기준으로 내림차순 정렬
+                    setOrders(sortedOrders); // 정렬된 데이터로 상태 업데이트
+                    console.log("data : ", sortedOrders);
+                    sortedOrders.forEach((order, orderIndex) => {
+                    console.log(`Order ${orderIndex + 1}의 orderItems:`);
                         order.orderItems.forEach((item, itemIndex) => {
-                          console.log(`Item ${itemIndex + 1}:`, item);
+                            console.log(`Item ${itemIndex + 1}:`, item);
                         });
-                      });
+                    });
                 })
                 .catch(error => {
                     console.error('Error fetching orders:', error);
