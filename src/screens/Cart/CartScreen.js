@@ -18,7 +18,7 @@ const CartScreen = () => {
 
   const navigation = useNavigation();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState('한성');
   const [items, setItems] = useState([
     {label: '한성대 입구역', value: '한성'},
     {label: '혜화역', value: '혜화'},

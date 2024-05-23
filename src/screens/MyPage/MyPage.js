@@ -9,7 +9,6 @@ const deviceWidth = Dimensions.get('window').width;
 
 const MyPage  = () => {
 
-   
     const navigation = useNavigation();
 
     return(
@@ -17,7 +16,7 @@ const MyPage  = () => {
             <Header />
             <View style={[styles.myContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             <TouchableOpacity onPress={() => navigation.navigate('LogIn')}>
-                <Text style={styles.myName}>ㅇㅇㅇ님</Text>
+                <Text style={styles.myName}>빵빵님</Text>
             </TouchableOpacity>
             </View>
             <View style={[styles.myContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
