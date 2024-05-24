@@ -5,11 +5,7 @@ import Icon2 from 'react-native-vector-icons/EvilIcons';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 import { MY_IP_ADDRESS } from '../../../config/config';
 
-const CartList = ({item, onQuantityChange,onDeleteCartItem}) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const toggleCheckbox = () => {
-    setIsChecked(!isChecked);
-  };
+const CartList = ({item, onQuantityChange,onDeleteCartItem, onCheckboxChange, isChecked}) => {
 
   const {imageUrl} = item;
   const networkImageUrl = imageUrl.replace('localhost', MY_IP_ADDRESS);
@@ -29,6 +25,9 @@ const handleDelete = () => {
   onDeleteCartItem(item.cartItemId);
 };
 
+const handleCheckboxToggle = () => {
+  onCheckboxChange(item.cartItemId, !isChecked);
+};
 
   return (
     <View
@@ -37,7 +36,7 @@ const handleDelete = () => {
         {borderBottomColor: '#949393', borderBottomWidth: 1},
       ]}>
         <View style={styles.iconContainer}>
-      <TouchableOpacity onPress={toggleCheckbox}>
+      <TouchableOpacity onPress={handleCheckboxToggle}>
         <Icon
           style={styles.checkbox}
           name={isChecked ? 'checkbox' : 'checkbox-outline'}></Icon>

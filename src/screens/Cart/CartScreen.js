@@ -25,6 +25,7 @@ const CartScreen = () => {
     {label: '성신여대역', value: '성신'},
   ]);
   const [cartItems, setCartItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState({});
 
   useEffect(() => {
     // 장바구니 데이터를 가져오는 함수
@@ -36,6 +37,14 @@ const CartScreen = () => {
         );
         console.log('장바구니 아이템 데이터:', response.data);
         setCartItems(response.data); // 응답 데이터를 상태에 저장
+        
+        // 모든 항목을 기본적으로 체크된 상태로 설정
+        const initialCheckedItems = response.data.reduce((acc, item) => {
+          acc[item.cartItemId] = true;
+          return acc;
+        }, {});
+        setCheckedItems(initialCheckedItems);
+
       } catch (error) {
         console.error(error);
       }
@@ -90,11 +99,22 @@ const handleQuantityChange = async (cartItemId, newQuantity) => {
     }
   };
   
+  const handleCheckboxChange = (cartItemId, isChecked) => {
+    setCheckedItems((prevCheckedItems) => ({
+        ...prevCheckedItems,
+        [cartItemId]: isChecked,
+    }));
+};
 
   // 각 항목의 수량을 모두 더하는 함수
   const getTotalQuantity = () => {
-    return cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  };
+    return cartItems.reduce((acc, item) => {
+        if (checkedItems[item.cartItemId]) {
+            return acc + item.quantity;
+        }
+        return acc;
+    }, 0);
+};
 
 // PurchaseScreen으로 네비게이션하며 cartItems 데이터 전달
 const goToPurchaseScreen = (cartItems) => {
@@ -146,6 +166,8 @@ const goToPurchaseScreen = (cartItems) => {
               item={item}
               onQuantityChange={handleQuantityChange}
               onDeleteCartItem={handleDeleteCartItem}
+              onCheckboxChange={handleCheckboxChange}
+              isChecked={checkedItems[item.cartItemId] || false}
             />
           ))
         ) : (
@@ -154,7 +176,7 @@ const goToPurchaseScreen = (cartItems) => {
       </ScrollView>
       <Text style={styles.quantityCount}>총 {getTotalQuantity()} 개</Text>
       <TouchableOpacity style={[styles.payButton, cartItems.length === 0 ? styles.payButtonEmpty : null]}
-       onPress={() => goToPurchaseScreen(cartItems)}>
+        onPress={() => goToPurchaseScreen(cartItems)}>
         <Text style={styles.payButtonText}>결제하기</Text>
       </TouchableOpacity>
     </View>
