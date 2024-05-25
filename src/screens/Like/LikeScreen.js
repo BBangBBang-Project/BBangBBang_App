@@ -8,7 +8,7 @@ import { useLikes } from '../../contexts/LikesContext';
 const LikeScreen = () => {
     const navigation = useNavigation();
     const isFocused = useIsFocused(); // 페이지 포커스 상태 확인
-    const { likes, fetchLikes } = useLikes(); // LikesContext에서 찜 목록 데이터와 데이터 로딩 함수를 가져옴
+    const { likes, fetchLikes, removeLike} = useLikes(); // LikesContext에서 찜 목록 데이터와 데이터 로딩 함수를 가져옴
     const customerId = 2;
 
 
@@ -17,7 +17,12 @@ const LikeScreen = () => {
             fetchLikes(); // 화면 포커스 시 찜 목록 갱신
             console.log(likes);
         }
-    }, [isFocused, likes]);
+    }, [isFocused]);
+
+    const handleRemoveLike = useCallback(async (productId) => {
+        await removeLike(productId, customerId);
+        fetchLikes();
+    }, [removeLike,fetchLikes, customerId]);
 
     return (
         <View style = {styles.likeScreenContainer}> 
@@ -29,7 +34,7 @@ const LikeScreen = () => {
             </View>
             <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
                 {likes.map((item) => (
-                    <LikeList key={item.favorite_id} item={item} customerId={customerId}/>
+                    <LikeList key={item.productId} item={item} customerId={customerId} onRemove={handleRemoveLike}/>
                 ))}
         </ScrollView>
         </View>

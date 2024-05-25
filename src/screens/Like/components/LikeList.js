@@ -1,25 +1,27 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet,Text,Image,Alert } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text, Image, Alert } from 'react-native';
 import axios from 'axios';
-import { useLikes } from '../../../contexts/LikesContext';
 import { MY_IP_ADDRESS } from '../../../config/config';
 
-const LikeList = ({ item, customerId }) => {
+const LikeList = ({ item, customerId, onRemove }) => {
     const { name, price, imageUrl} = item;
-    const networkImageUrl = imageUrl.replace('localhost', MY_IP_ADDRESS);
     const salePrice = parseInt(price * 0.7);
-    const { removeLike } = useLikes();
 
   // 상품을 찜 목록에서 삭제하는 함수
-  const removeFromFavorites = async () => {
-    removeLike(item.productId, customerId);
-    console.log("name : ", name)
-    console.log("id : ", item.productId )
-};
+    const removeFromFavorites = async () => {
+        try {
+            await onRemove(item.productId);
+            console.log("name : ", name)
+            console.log("id : ", item.productId )
+        }catch (error) {
+            console.error('Error removing from favorites:', error);
+            Alert.alert('삭제에 실패했습니다.');
+        }
+    };
 
         // 상품을 장바구니에 추가하는 함수
     const addToCart = () => {
-        axios.post(`http://${MY_IP_ADDRESS}:8080/customer/2/cart`, {
+        axios.post(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart`, {
         breadId: item.productId, // 상품 ID
         quantity: 1, // 선택한 수량
         })
@@ -37,7 +39,7 @@ const LikeList = ({ item, customerId }) => {
             <View style = {styles.rowLikeContainer}>
 
             <View style = {styles.listImageContainer}>
-                <Image style = {styles.listImage} source={{ uri: networkImageUrl }} />
+                <Image style = {styles.listImage} source={{ uri: imageUrl }} />
             </View>
 
             <Text style = {styles.listName}>{name}</Text>
@@ -46,10 +48,9 @@ const LikeList = ({ item, customerId }) => {
             <Text style={styles.originalPrice}>{price}원</Text>  
             <Text style={styles.salePrice}>{salePrice}원</Text>      
         </View>
-       
         <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.deleteButton} onPress={removeFromFavorites} >
-              <Text style={styles.deleteText}>삭제</Text>
+            <Text style={styles.deleteText}>삭제</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.inMyBagButton} onPress={addToCart}>
               <Text style={styles.inMyBagText}>장바구니 담기</Text>
