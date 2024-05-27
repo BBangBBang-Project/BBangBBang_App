@@ -4,6 +4,7 @@ import Geolocation from "react-native-geolocation-service";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 async function requestPermission() {
   try {
@@ -72,12 +73,13 @@ function MapScreen() {
   if (!location) {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Splash Screen</Text>
+        <Text style={styles.text}>Loading...</Text>
       </View>
     );
   }
 
   return (
+    <SafeAreaView style={styles.safeArea}>
     <View style={styles.container}>
       <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.goBack()}>
         <Icon name="chevron-back-outline" style={styles.icon} />
@@ -114,10 +116,14 @@ function MapScreen() {
         <Text style={styles.buttonText}>현재 위치 가져오기</Text>
       </TouchableOpacity>
     </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex :1,
+  },
   container: {
     flex: 1,
   },
