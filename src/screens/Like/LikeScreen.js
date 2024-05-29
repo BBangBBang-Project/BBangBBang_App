@@ -4,13 +4,13 @@ import LikeList from './components/LikeList';
 import { View, Text, StyleSheet,TouchableOpacity,ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useLikes } from '../../contexts/LikesContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const LikeScreen = () => {
     const navigation = useNavigation();
     const isFocused = useIsFocused(); // 페이지 포커스 상태 확인
     const { likes, fetchLikes, removeLike} = useLikes(); // LikesContext에서 찜 목록 데이터와 데이터 로딩 함수를 가져옴
     const customerId = 2;
-
 
     useEffect(() => {
         if (isFocused) {
@@ -25,7 +25,7 @@ const LikeScreen = () => {
     }, [removeLike,fetchLikes, customerId]);
 
     return (
-        <View style = {styles.likeScreenContainer}> 
+        <SafeAreaView style = {styles.likeScreenContainer} edges={['top']}> 
         <View style = {[styles.titleContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
         <TouchableOpacity onPress={() => navigation.goBack() ? navigation.goBack() : navigation.navigate('Home')}>
                 <Icon style={styles.goBackButton} name = "chevron-back-outline"></Icon>
@@ -37,7 +37,7 @@ const LikeScreen = () => {
                     <LikeList key={item.productId} item={item} customerId={customerId} onRemove={handleRemoveLike}/>
                 ))}
         </ScrollView>
-        </View>
+        </SafeAreaView>
         
     );
 };
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignContent: 'center',
         flexDirection: 'row',
-        marginTop: 50,
+        marginTop: 20,
       },
       goBackButton: {
         marginLeft: 10,
