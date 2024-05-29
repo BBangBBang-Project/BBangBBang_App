@@ -3,13 +3,14 @@ import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Octicons';
 import {useNavigation} from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PurchaseComplete = () => {
 
     const navigation = useNavigation();
     return (
 
-        <View style = {styles.purchaseCompleteContainer}> 
+        <SafeAreaView style = {styles.purchaseCompleteContainer}> 
         <View style = {styles.titleContainer}>
         <TouchableOpacity onPress={() => navigation.navigate('BottomTab')}>
                 <Icon style={styles.goBackButton} name = "chevron-back-outline"></Icon>
@@ -30,7 +31,7 @@ const PurchaseComplete = () => {
                 <Text style={styles.directionTitle}>오시는 방법</Text>
                 <Text style={styles.directionText}>지하철 2번 출구로 내려와서 2분 도보</Text>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -43,14 +44,15 @@ const styles = StyleSheet.create({
         justifyContent : 'flex-start',
         alignContent : 'center',
         flexDirection: 'row',
-        marginTop : 50,
+        marginTop : 20,
     },
     goBackButton : {
         marginLeft : 10,
         fontSize : 40,
-        marginBottom : 10,
+        marginBottom : 20,
     },
     titleText : {
+        marginTop : 5,
         marginLeft : 20,
         fontSize : 30,
         fontFamily:'Syncopate', 
