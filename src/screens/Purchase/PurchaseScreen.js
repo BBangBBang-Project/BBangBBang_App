@@ -5,6 +5,7 @@ import { View, Text, StyleSheet,TouchableOpacity,ScrollView,Dimensions } from 'r
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import { MY_IP_ADDRESS } from '../../config/config';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PurchaseScreen = () => {
     const navigation = useNavigation();
@@ -27,9 +28,7 @@ const PurchaseScreen = () => {
             axios.get(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart`)
                 .then(response => {
                     console.log('결제하기 불러오기 성공:', response.data);
-                    const totalPrice = calculateTotalPrice(response.data);
-    
-                    
+                    const totalPrice = calculateTotalPrice(response.data);    
                     const updatedCartItems = response.data.map(item => ({
                         ...item,
                         imageUrl: item.imageUrl, 
@@ -107,7 +106,7 @@ const PurchaseScreen = () => {
 
     
     return (
-        <View style = {styles.purchaseScreenContainer}> 
+        <SafeAreaView style = {styles.purchaseScreenContainer}> 
         <View style = {styles.titleContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon style={styles.goBackButton} name = "chevron-back-outline"></Icon>
@@ -136,7 +135,7 @@ const PurchaseScreen = () => {
             <TouchableOpacity style={styles.payButton} onPress={() => goToPurchaseComplete(from)}>
                 <Text style={styles.payButtonText}>결제하기</Text>
             </TouchableOpacity>
-        </View>
+        </SafeAreaView>
         
     );
 };
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
         justifyContent : 'flex-start',
         alignContent : 'center',
         flexDirection: 'row',
-        marginTop : 50,
+        marginTop : 20,
     },
     goBackButton : {
         marginLeft : 10,
