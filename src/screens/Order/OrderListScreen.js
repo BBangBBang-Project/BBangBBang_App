@@ -5,6 +5,7 @@ import { View, Text, StyleSheet,TouchableOpacity,ScrollView } from 'react-native
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import { MY_IP_ADDRESS } from '../../config/config';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const OrderListScreen = () => {
 
@@ -30,7 +31,7 @@ const OrderListScreen = () => {
                 });
     }, []);
     return (
-        <View style = {styles.orderScreenContainer}> 
+        <SafeAreaView style = {styles.orderScreenContainer}> 
         <View style = {[styles.titleContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon style={styles.goBackButton} name = "chevron-back-outline"></Icon>
@@ -42,7 +43,7 @@ const OrderListScreen = () => {
                 <OrderList key={index} order={order} /> // 주문 데이터를 props로 전달
             ))}
         </ScrollView>
-        </View>
+        </SafeAreaView>
         
     );
 };
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
         justifyContent : 'flex-start',
         alignContent : 'center',
         flexDirection: 'row',
-        marginTop : 50,
+        marginTop : 20,
     },
     goBackButton : {
         marginLeft : 10,
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
         marginBottom : 30,
     },
     titleText : {
+        marginTop : 5,
         marginLeft : 20,
         fontSize : 30,
         fontFamily:'Syncopate', 
