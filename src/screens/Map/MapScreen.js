@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Platform, PermissionsAndroid, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, Platform, PermissionsAndroid, TouchableOpacity, Alert, Image } from "react-native";
 import Geolocation from "react-native-geolocation-service";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -72,8 +72,11 @@ function MapScreen() {
 
   if (!location) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Loading...</Text>
+      <View style={styles.splashContainer}>
+       <Image
+          source={require('../../assets/images/whiteBread.png')} // 실제 스플래시 이미지로 교체
+          style={styles.splashImage}
+        />
       </View>
     );
   }
@@ -126,6 +129,17 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  splashContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  splashImage: {
+    width: 100,
+    height: 100, // 실제 스플래시 이미지 크기로 조정
+    resizeMode: 'contain', // 이미지 조정 옵션
   },
   text: {
     textAlign: "center",
