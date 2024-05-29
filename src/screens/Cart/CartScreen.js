@@ -13,6 +13,7 @@ import CartList from './components/CartList';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import { MY_IP_ADDRESS } from '../../config/config';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CartScreen = () => {
 
@@ -123,7 +124,7 @@ const goToPurchaseScreen = (cartItems) => {
 };
 
   return (
-    <View style={styles.cartScreenContainer}>
+    <SafeAreaView style={styles.cartScreenContainer}>
       <View
         style={[
           styles.titleContainer,
@@ -179,7 +180,7 @@ const goToPurchaseScreen = (cartItems) => {
         onPress={() => goToPurchaseScreen(cartItems)}>
         <Text style={styles.payButtonText}>결제하기</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignContent: 'center',
     flexDirection: 'row',
-    marginTop: 50,
+    marginTop: 20,
   },
   goBackButton: {
     marginLeft: 10,
