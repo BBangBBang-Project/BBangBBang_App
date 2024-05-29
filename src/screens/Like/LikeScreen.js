@@ -27,7 +27,7 @@ const LikeScreen = () => {
     return (
         <View style = {styles.likeScreenContainer}> 
         <View style = {[styles.titleContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => navigation.goBack() ? navigation.goBack() : navigation.navigate('Home')}>
                 <Icon style={styles.goBackButton} name = "chevron-back-outline"></Icon>
             </TouchableOpacity>
             <Text style={styles.titleText}>찜한 상품 </Text>
