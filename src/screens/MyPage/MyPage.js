@@ -19,16 +19,16 @@ const MyPage  = () => {
                 <Text style={styles.myName}>빵빵님</Text>
             </TouchableOpacity>
             </View>
-            <View style={[styles.myContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
+            {/* <View style={[styles.myContainer, { borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             <TouchableOpacity onPress={() => navigation.navigate('LogInS')}> 
             <Text style = {styles.myText}>개인정보 변경</Text>
             </TouchableOpacity>  
-            </View>
-            <View style={[styles.myContainer,{ borderBottomColor: '#949393', borderBottomWidth: 1}]}>
+            </View> */}
+            {/* <View style={[styles.myContainer,{ borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             <TouchableOpacity onPress={() => navigation.navigate('LogInS')}>
             <Text style = {styles.myText}>결제수단 관리</Text>
             </TouchableOpacity>
-            </View>
+            </View>  */}
             <View style={[styles.myContainer,{ borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             <TouchableOpacity onPress={() => navigation.navigate('Order')}>
             <Text style = {styles.myText}>주문내역 조회</Text>
@@ -36,14 +36,14 @@ const MyPage  = () => {
             </View>
             <View style={[styles.myContainer,{ borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             <TouchableOpacity onPress={() => navigation.navigate('Like')}>
-            <Text style = {styles.myText}>찜한 상품</Text>
+            <Text style = {styles.myText}>찜한 상품 조회</Text>
             </TouchableOpacity>
             </View>
-            <View style={[styles.myContainer,{ borderBottomColor: '#949393', borderBottomWidth: 1}]}>
+            {/* <View style={[styles.myContainer,{ borderBottomColor: '#949393', borderBottomWidth: 1}]}>
             <TouchableOpacity onPress={() => navigation.navigate('LogIn')}>
             <Text style = {styles.myText}>재입고 알림</Text>
             </TouchableOpacity>
-            </View>
+            </View> */}
         </View>
     );
 };
