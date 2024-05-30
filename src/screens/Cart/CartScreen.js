@@ -117,10 +117,15 @@ const handleQuantityChange = async (cartItemId, newQuantity) => {
     }, 0);
 };
 
+// 선택된 항목만 필터링하는 함수
+const getCheckedItems = () => {
+  return cartItems.filter(item => checkedItems[item.cartItemId]);
+};
+
 // PurchaseScreen으로 네비게이션하며 cartItems 데이터 전달
-const goToPurchaseScreen = (cartItems) => {
-  // Navigate to PurchaseScreen with cartItems data
-  navigation.navigate('Purchase', { from: 'cart', cartItems, customerId :'2'});
+const goToPurchaseScreen = () => {
+  const selectedItems = getCheckedItems();
+  navigation.navigate('Purchase', { from: 'cart', selectedItems, customerId :'2'});
 };
 
   return (
@@ -177,7 +182,7 @@ const goToPurchaseScreen = (cartItems) => {
       </ScrollView>
       <Text style={styles.quantityCount}>총 {getTotalQuantity()} 개</Text>
       <TouchableOpacity style={[styles.payButton, cartItems.length === 0 ? styles.payButtonEmpty : null]}
-        onPress={() => goToPurchaseScreen(cartItems)}>
+        onPress={goToPurchaseScreen}>
         <Text style={styles.payButtonText}>결제하기</Text>
       </TouchableOpacity>
     </SafeAreaView>

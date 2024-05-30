@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const PurchaseScreen = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { from, item, quantity, customerId } = route.params;
+    const { from, selectedItems, item, quantity, customerId } = route.params;
     const [totalPrice, setTotalPrice] = useState(0);
     const [directItem, setDirectItem] = useState(null);
     const [cartItems, setCartItems] = useState([]);
@@ -19,7 +19,7 @@ const PurchaseScreen = () => {
     
     const calculateTotalPrice = (data) => {
         return data.reduce((acc, item) => {
-            return acc + item.price * item.quantity * 0.7;
+            return acc + item.price * item.quantity;
         }, 0);
     };
     
@@ -28,15 +28,14 @@ const PurchaseScreen = () => {
             axios.get(`http://${MY_IP_ADDRESS}:8080/customer/${customerId}/cart`)
                 .then(response => {
                     console.log('결제하기 불러오기 성공:', response.data);
-                    const totalPrice = calculateTotalPrice(response.data);    
-                    const updatedCartItems = response.data.map(item => ({
+                    const updatedCartItems = selectedItems.map(item => ({
                         ...item,
-                        imageUrl: item.imageUrl, 
-                        price: item.price * 0.7 
+                        price: item.price * 0.7 // 가격 조정
                     }));
-    
                     setCartItems(updatedCartItems);
-                    setTotalPrice(totalPrice);
+                    const calculatedTotalPrice = calculateTotalPrice(updatedCartItems);
+                    setTotalPrice(calculatedTotalPrice);
+                    
                 })
                 .catch(error => {
                     console.error('결제하기 불러오기 실패:', error);
