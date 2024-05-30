@@ -55,14 +55,16 @@ const styles = StyleSheet.create({
         resizeMode : 'contain',
     },
     listName : {
+        marginTop : 10,
         fontSize : 20,
         marginLeft : 50,
+        width: 100,
     },
     quantityContainer :{
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft : -100,
+        marginLeft : -150,
     }, 
     quantityTitle : {
         marginLeft : 50,
